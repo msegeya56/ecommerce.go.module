@@ -1,7 +1,7 @@
 package migration
 
 import (
-	"github.com/msegeya56/ecommerce.go.module/pkg/domains/entities"
+	"github.com/msegeya56/ecommerce.go.module/pkg/domains/models"
 	"gorm.io/gorm"
 )
 
@@ -10,19 +10,19 @@ import (
 
 func SyncToDB(db *gorm.DB) error {
 	err := db.AutoMigrate(
-		&entities.Customer{},
-		&entities.Category{},
-		&entities.Checkout{},
-		&entities.CreditLimit{},
-		&entities.Deposit{},
-		&entities.Invoice{},
-		&entities.Order{},
-		&entities.Payment{},
-		&entities.Product{},
-		&entities.Receipt{},
-		&entities.Review{},
-		&entities.Rating{},
-		&entities.CreditCard{},
+		&models.Customer{},
+		&models.Category{},
+		&models.Checkout{},
+		&models.CreditLimit{},
+		&models.Deposit{},
+		&models.Invoice{},
+		&models.Order{},
+		&models.Payment{},
+		&models.Product{},
+		&models.Receipt{},
+		&models.Review{},
+		&models.Rating{},
+		&models.CreditCard{},
 	)
 	if err != nil {
 		return err

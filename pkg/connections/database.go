@@ -4,7 +4,7 @@ import (
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
 
-	"github.com/msegeya56/ecommerce.go.module/pkg/domains/entities"
+	"github.com/msegeya56/ecommerce.go.module/pkg/domains/models"
 	
 )
 
@@ -23,19 +23,19 @@ Db, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{})
 
 	// AutoMigrate all the eCommerce structs
 	err = Db.AutoMigrate(
-		&entities.Category{},
-		&entities.Checkout{},
-		&entities.CreditLimit{},
-		&entities.Customer{},
-		&entities.Deposit{},
-		&entities.Invoice{},
-		&entities.Order{},
-		&entities.Payment{},
-		&entities.Product{},
-		&entities.Receipt{},
-		&entities.Review{},
-		&entities.Rating{},
-		&entities.CreditCard{},
+		&models.Category{},
+		&models.Checkout{},
+		&models.CreditLimit{},
+		&models.Customer{},
+		&models.Deposit{},
+		&models.Invoice{},
+		&models.Order{},
+		&models.Payment{},
+		&models.Product{},
+		&models.Receipt{},
+		&models.Review{},
+		&models.Rating{},
+		&models.CreditCard{},
 	)
 	if err != nil {
 		return nil, err

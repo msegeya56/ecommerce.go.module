@@ -15,6 +15,7 @@ type JSONSerializableu interface{
 
 type Category struct {
 	commons.Foundation
+	ProductID uint `json:"product_id,omitempty"`
 
 } 
 
@@ -31,15 +32,6 @@ type  CategoryReply struct {
 
 
 
-
-func (c *Category) ToMsgpack() ([]byte, error) {
-	return msgpack.Marshal(c)
-}
-
-func (c *Category) FromMsgpack(data []byte) error {
-	return msgpack.Unmarshal(data, &c)
-}
-
 func (c *CategoryReply) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(c)
 }
@@ -54,6 +46,9 @@ func (c *CategoryReply) FromMsgpack(data []byte) error {
 
 type Checkout struct {
 	commons.Foundation
+    OrderID uint `json:"order_id,omitempty"`
+	DepositID uint `json:"deposit_id,omitempty"`
+	CreditLimitID uint `json:"credit_limit_id,omitempty"`
 
 }
 
@@ -68,13 +63,6 @@ type  CheckoutReply struct {
 
 
 
-func (ch *Checkout) ToMsgpack() ([]byte, error) {
-	return msgpack.Marshal(ch)
-}
-
-func (ch *Checkout) FromMsgpack(data []byte) error {
-	return msgpack.Unmarshal(data, &ch)
-}
 
 
 func (ch *CheckoutReply) ToMsgpack() ([]byte, error) {
@@ -96,7 +84,7 @@ func (ch *CheckoutReply) FromMsgpack(data []byte) error {
 
 type CreditLimit struct {
 	commons.Foundation
-
+    DepositID  uint `json:"deposit_id,omitempty"`
 
 }
 
@@ -114,14 +102,6 @@ type  CreditLimitReply struct {
 
 
 
-
-func (cl *CreditLimit) ToMsgpack() ([]byte, error) {
-	return msgpack.Marshal(cl)
-}
-
-func (cl *CreditLimit) FromMsgpack(data []byte) error {
-	return msgpack.Unmarshal(data, &cl)
-}
 
 func (cl *CreditLimitReply) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(cl)
@@ -162,16 +142,6 @@ type  CustomerReply struct {
 
 
 
-func (c *Customer) ToMsgpack() ([]byte, error) {
-	return msgpack.Marshal(c)
-}
-
-func (c *Customer) FromMsgpack(data []byte) error {
-	return msgpack.Unmarshal(data, &c)
-}
-
-
-
 func (c *CustomerReply) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(c)
 }
@@ -192,6 +162,8 @@ func (c *CustomerReply) FromMsgpack(data []byte) error {
 
 type Deposit struct {
 	commons.Foundation
+	CustomerID uint `json:"customer_id,omitempty"`
+	CreditCardID uint `json:"credit_card_id,omitempty"`
 }
 
 
@@ -258,8 +230,7 @@ func (i *INvoicetReply) FromMsgpack(data []byte) error {
 
 type Order struct {
 	commons.Foundation
-	ID          uint
-	Customer     Customer
+	CustomerID   uint `json:"customer_id,omitempty"`
 	Products     []Product
 	
 }
@@ -291,8 +262,9 @@ func (o *OrdertReply) FromMsgpack(data []byte) error {
 
 type Payment struct {
 	commons.Foundation
-		Order      Order
-
+	CustomerID uint `json:"customer_id,omitempty"`
+    OrderID  uint `json:"order_id,omitempty"`
+    CreditCardID uint `json:"credit_card_id,omitempty"`
 }
 
 
@@ -334,7 +306,8 @@ func (pa PaymentReply) FromMsgpack(data []byte) error {
 
 type Product struct {
 	commons.Foundation
-	Category   Category
+	CustomerID uint `json:"customer_id,omitempty"`
+	CategoryID uint `json:"category_id,omitempty"`
 	
 }
 
@@ -355,13 +328,6 @@ type  ProductReply struct {
 
 
 
-func (p *Product) ToMsgpack() ([]byte, error) {
-	return msgpack.Marshal(p)
-}
-
-func (p *Product) FromMsgpack(data []byte) error {
-	return msgpack.Unmarshal(data, &p)
-}
 
 
 func (pr *ProductReply) ToMsgpack() ([]byte, error) {
@@ -378,8 +344,8 @@ func (pr*ProductReply) FromMsgpack(data []byte) error {
 
 type Receipt struct {
 	commons.Foundation
-	ID     uint
-	Invoice Invoice
+	PaymentID uint  `json:"payment_id,omitempty"`
+	InvoiceID uint `json:"invoice_id,omitempty"`
 	
 }
 
@@ -421,6 +387,7 @@ func (rr *ReceiptReply) FromMsgpack(data []byte) error {
 
 type Review struct {
 	commons.Foundation
+	CustomerID uint `json:"customer_id,omitempty"`
 
 }
 
@@ -435,16 +402,6 @@ type   ReviewReply struct {
 
 
 
-
-
-
-func (r *Review) ToMsgpack() ([]byte, error) {
-	return msgpack.Marshal(r)
-}
-
-func (r*Review) FromMsgpack(data []byte) error {
-	return msgpack.Unmarshal(data, &r)
-}
 
 
 
@@ -465,7 +422,7 @@ func (re *ReviewReply) FromMsgpack(data []byte) error {
 
 type Rating struct {
 	commons.Foundation
-	ProductID uint
+	ProductID uint `json:"product_id,omitempty"`
 }
 
 type   RatingReply struct {
@@ -480,15 +437,6 @@ type   RatingReply struct {
 
 
 
-
-
-func (r *Rating) ToMsgpack() ([]byte, error) {
-	return msgpack.Marshal(r)
-}
-
-func (r *Rating) FromMsgpack(data []byte) error {
-	return msgpack.Unmarshal(data, &r)
-}
 
 
 
@@ -510,6 +458,7 @@ func ( ra *RatingReply) FromMsgpack(data []byte) error {
 type CreditCard struct {
 commons.Foundation
 
+
 }
 
 
@@ -524,13 +473,6 @@ type   CreditCardReply struct {
 
 
 
-func (c *CreditCard) ToMsgpack() ([]byte, error) {
-	return msgpack.Marshal(c)
-}
-
-func (c *CreditCard) FromMsgpack(data []byte) error {
-	return msgpack.Unmarshal(data, &c)
-}
 
 
 
