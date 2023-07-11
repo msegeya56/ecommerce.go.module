@@ -1,40 +1,74 @@
 package entities
 
+import (
+	"time"
 
-
-import(
-	"github.com/msegeya56/ecommerce.go.module/pkg/commons"
-	"github.com/msegeya56/ecommerce.go.module/pkg/tools/utils"
+	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"github.com/vmihailenco/msgpack/v5"
 )
+
+type JSONSerializableu interface{
+	ToMsgpack() ([]byte, error)
+	FromMsgpack(data []byte) error
+}
 
 
 
 type Category struct {
 	commons.FoundationEntity
-	ID          int
-	Name        string
-	Description string
-	Parent      *Category
+	ID          uint
+	Name         string
+	Description  string
+	Parent       *Category
 	Subcategories []Category
-	Products    []Product
+	Products     []Product
 }
 
+func (c *Category) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(c)
+}
 
+func (c *Category) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &c)
+}
 
 type Checkout struct {
 	commons.FoundationEntity
-	ID         int
+	ID        uint
 	Customer   Customer
 	Products   []Product
 	Total      float64
 	Discount   float64
 	PromoCode  string
-    Completed  bool
+	Completed  bool
+}
+
+func (ch *Checkout) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(ch)
+}
+
+func (ch *Checkout) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &ch)
+}
+type CreditLimit struct {
+	commons.FoundationEntity
+	Customer   Customer
+	Limit      float64
+	Used       float64
+}
+
+
+func (cl *CreditLimit) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(cl)
+}
+
+func (cl *CreditLimit) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &cl)
 }
 
 type Customer struct {
 	commons.FoundationEntity
-	ID               int
+	ID              uint
 	Username         string
 	Email            string
 	Password         string
@@ -53,23 +87,32 @@ type Customer struct {
 	RegistrationDate time.Time
 }
 
-
-
-
-
-type Deposit struct {
-	commosn.FoundationEntity
-	ID        int
-	Customer  Customer
-	Amount    float64
-	
+func (c *Customer) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(c)
 }
 
+func (c *Customer) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &c)
+}
 
+type Deposit struct {
+	commons.FoundationEntity
+	ID      uint
+	Customer Customer
+	Amount   float64
+}
+
+func (d *Deposit) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(d)
+}
+
+func (d *Deposit) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &d)
+}
 
 type Invoice struct {
 	commons.FoundationEntity
-	ID         int
+	ID        uint
 	Order      Order
 	Amount     float64
 	IssuedDate time.Time
@@ -80,51 +123,61 @@ type Invoice struct {
 	InvoiceURL string
 }
 
-ype Order struct {
+func (i *Invoice) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(i)
+}
+
+func (i *Invoice) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &i)
+}
+
+type Order struct {
 	commons.FoundationEntity
-	ID           int
+	ID          uint
 	Customer     Customer
 	Products     []Product
 	TotalPrice   float64
 	ShippingCost float64
 	Discount     float64
 	Status       string
-	Payment      Payment
-	ShippingInfo ShippingInfo
-	Invoice      Invoice
-	
+	Payment      []Payment
+	Invoice      []Invoice
 }
 
+func (o *Order) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(o)
+}
 
-
-
-
+func (o *Order) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &o)
+}
 
 type Payment struct {
 	commons.FoundationEntity
-	ID         int
-	Order      entities.Order
+	ID        uint
+	Order      Order
 	Amount     float64
 	Method     string
 	Status     string
-	CardHolder string
-	CardNumber string
-	ExpiryDate string
-	CVV        string
-	CreatedAt  time.Time
-	UpdatedAt  time.Time
+	CreditCard CreditCard
+	
 }
 
+func (p *Payment) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(p)
+}
 
-
+func (p *Payment) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &p)
+}
 
 type Product struct {
 	commons.FoundationEntity
-	ID          int
+	ID         uint
 	Name        string
 	Description string
 	Price       float64
-	Stock       int
+	Stock      uint
 	Category    Category
 	Tags        []string
 	Reviews     []Review
@@ -132,148 +185,75 @@ type Product struct {
 	Images      []string
 }
 
+func (p *Product) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(p)
+}
 
+func (p *Product) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &p)
+}
 
 type Receipt struct {
-	common.FoundationEntity
-	ID         int
-	Invoice    Invoice
-	Amount     float64
-	Payment    entities.Payment
-	
+	commons.FoundationEntity
+	ID     uint
+	Invoice Invoice
+	Amount  float64
+	Payments []Payment
 }
 
-
-
-
-
-
-func (c *Customer) ToJSON() string {
-	return utils.ToJSON(c)
+func (r *Receipt) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(r)
 }
 
-func FromJSON(jsonStr string, entity interface{}) error {
-	return utils.FromJSON(jsonStr, entity)
+func (r *Receipt) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &r)
 }
 
-
-
-func (r *Receipt) ToJSON() string {
-	return utils.ToJSON(r)
+type Review struct {
+	ID       uint
+	UserID   uint
+	ProductID uint
+	Rating   float64
+	Comment  string
+	Date     time.Time
 }
 
-func FromJSON(jsonStr string, entity interface{}) error {
-	return utils.FromJSON(jsonStr, entity)
+func (r *Review) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(r)
 }
 
-
-
-func (ch**Checkout) ToJSON() string {
-	return utils.ToJSON(ch)
+func (r *Review) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &r)
 }
 
-func FromJSON(jsonStr string, entity interface{}) error {
-	return utils.FromJSON(jsonStr, entity)
+type Rating struct {
+	ProductID uint
+	Average   float64
+	Count     uint
 }
 
-
-func (p *Payment) ToJSON() string {
-	return utils.ToJSON(p)
+func (r *Rating) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(r)
 }
 
-func FromJSON(jsonStr string, entity interface{}) error {
-	return utils.FromJSON(jsonStr, entity)
+func (r *Rating) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &r)
 }
 
-
-func (o *Order) ToJSON() string {
-	return utils.ToJSON(o)
+type CreditCard struct {
+	CardNumber     string
+	CardholderName string
+	ExpirationDate string
+	CVV            string
 }
 
-
-
-func FromJSON(jsonStr string, entity interface{}) error {
-	return utils.FromJSON(jsonStr, entity)
+func (c *CreditCard) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(c)
 }
 
-
-func (c *Customer) ToJSON() string {
-	return utils.ToJSON(c)
+func (c *CreditCard) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &c)
 }
-
-func FromJSON(jsonStr string, entity interface{}) error {
-	return utils.FromJSON(jsonStr, entity)
-}
-
-func FromJSON(jsonStr string, entity interface{}) error {
-	return utils.FromJSON(jsonStr, entity)
-}
-
-
-func (p *Payment) ToJSON() string {
-	return utils.ToJSON(p)
-}
-
-func FromJSON(jsonStr string, entity interface{}) error {
-	return utils.FromJSON(jsonStr, entity)
-}
-
-
-func (o *Order) ToJSON() string {
-	return utils.ToJSON(o)
-}
-
-
-
-func FromJSON(jsonStr string, entity interface{}) error {
-	return utils.FromJSON(jsonStr, entity)
-}
-
-
-
-
-func ( cr*CureditLimit) ToJSON() string {
-	return utils.ToJSON(cr)
-}
-
-// func FromJSON(jsonStr string, entity interface{}) error {
-// 	return utils.FromJSON(jsonStr, entity)
-// }
-
-
-
-
-func (i *Invoice) ToJSON() string {
-	return utils.ToJSON(i)
-}
-
-
-
-
-
-func (d *Deposit) ToJSON() string {
-	return utils.ToJSON(d)
-}
-
-func (ca *Category) ToJSON() string {
-	return utils.ToJSON(ca)
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

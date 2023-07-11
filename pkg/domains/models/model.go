@@ -1,130 +1,287 @@
 package models
 
+import (
+	
 
+	"github.com/msegeya56/ecommerce.go.module/pkg/domains/entities"
+	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"github.com/vmihailenco/msgpack/v5"
+)
 
-import()
-
-
+type JSONSerializableu interface{
+	ToMsgpack() ([]byte, error)
+	FromMsgpack(data []byte) error
+}
 
 type Category struct {
-	common.FoundationEntity
-	ID          int
-	Name        string
-	Description string
-	Parent      *Category
-	Subcategories []Category
-	Products    []Product
+	commons.Foundation
+
+} 
+
+
+
+type  CategoryReply struct {
+	commons.Foundation
+	Data        *entities.Category
+	Collection  []entities.Category
+	Stream      <-chan entities.Category
+	Error       error
+	ErrorStream <-chan error
 }
+
+
+
+
+func (c *Category) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(c)
+}
+
+func (c *Category) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &c)
+}
+
+func (c *CategoryReply) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(c)
+}
+
+func (c *CategoryReply) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &c)
+}
+
+
 
 
 
 type Checkout struct {
-	common.FoundationEntity
-	ID         int
-	Customer   Customer
-	Products   []Product
-	Total      float64
-	Discount   float64
-	PromoCode  string
-    Completed  bool
+	commons.Foundation
+
 }
+
+type  CheckoutReply struct {
+	commons.Foundation
+	Data        *entities.Checkout
+	Collection  []entities.Checkout
+	Stream      <-chan entities.Checkout
+	Error       error
+	ErrorStream <-chan error
+}
+
+
+
+func (ch *Checkout) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(ch)
+}
+
+func (ch *Checkout) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &ch)
+}
+
+
+func (ch *CheckoutReply) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(ch)
+}
+
+func (ch *CheckoutReply) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &ch)
+}
+
+
+
+
+
+
+
+
+
+
+type CreditLimit struct {
+	commons.Foundation
+
+
+}
+
+
+type  CreditLimitReply struct {
+	commons.Foundation
+	Data        *entities.CreditLimit
+	Collection  []entities.CreditLimit
+	Stream      <-chan entities.CreditLimit
+	Error       error
+	ErrorStream <-chan error
+}
+
+
+
+
+
+
+func (cl *CreditLimit) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(cl)
+}
+
+func (cl *CreditLimit) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &cl)
+}
+
+func (cl *CreditLimitReply) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(cl)
+}
+
+func (cl *CreditLimitReply) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &cl)
+}
+
+
+
+
+
+
+
 
 type Customer struct {
-	common.FoundationEntity
-	ID               int
-	Username         string
-	Email            string
-	Password         string
-	FullName         string
-	Phone            string
-	Address          string
-	Orders           []Order
-	Wishlist         []Product
-	Reviews          []Review
-	CreditCard       CreditCard
-	ShippingAddress  string
-	BillingAddress   string
-	ProfilePicture   string
-	AccountBalance   float64
-	LastLogin        time.Time
-	RegistrationDate time.Time
+	commons.Foundation
+	
 }
 
-func (c *Customer) toJSON() string {
-	data, err := json.Marshal(c)
-	if err != nil {
-		fmt.Println("Error marshaling customer to JSON:", err)
-		return ""
-	}
-	return string(data)
+
+type  CustomerReply struct {
+	commons.Foundation
+	Data        *entities.Customer
+	Collection  []entities.Customer
+	Stream      <-chan entities.Customer
+	Error       error
+	ErrorStream <-chan error
 }
 
-func fromJSON(jsonStr string) (*Customer, error) {
-	var c Customer
-	err := json.Unmarshal([]byte(jsonStr), &c)
-	if err != nil {
-		return nil, err
-	}
-	return &c, nil
+
+
+
+
+
+
+
+
+
+func (c *Customer) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(c)
 }
+
+func (c *Customer) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &c)
+}
+
+
+
+func (c *CustomerReply) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(c)
+}
+
+func (c *CustomerReply) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &c)
+}
+
+
+
+
+
+
+
 
 
 
 
 type Deposit struct {
-	common.FoundationEntity
-	ID        int
-	Customer  Customer
-	Amount    float64
-	
+	commons.Foundation
 }
+
+
+
+type  DepositReply struct {
+	commons.Foundation
+	Data        *entities.Deposit
+	Collection  []entities.Deposit
+	Stream      <-chan entities.Deposit
+	Error       error
+	ErrorStream <-chan error
+}
+
+
+
+
+
+
+func (d *DepositReply) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(d)
+}
+
+func (d *Deposit) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &d)
+}
+
+
+
+
 
 
 
 type Invoice struct {
-	common.FoundationEntity
-	ID         int
+	commons.Foundation
 	Order      Order
-	Amount     float64
-	IssuedDate time.Time
-	DueDate    time.Time
-	Status     string
-	Paid       bool
-	Payment    Payment
-	InvoiceURL string
-}
-
-ype Order struct {
-	commons.FoundationEntity
-	ID           int
-	Customer     Customer
-	Products     []Product
-	TotalPrice   float64
-	ShippingCost float64
-	Discount     float64
-	Status       string
-	Payment      Payment
-	ShippingInfo ShippingInfo
-	Invoice      Invoice
 	
 }
 
-func (o *Order) toJSON() string {
-	data, err := json.Marshal(o)
-	if err != nil {
-		fmt.Println("Error marshaling order to JSON:", err)
-		return ""
-	}
-	return string(data)
+type  INvoicetReply struct {
+	commons.Foundation
+	Data        *entities.Deposit
+	Collection  []entities.Deposit
+	Stream      <-chan entities.Deposit
+	Error       error
+	ErrorStream <-chan error
 }
 
-func fromJSON(jsonStr string) (*Order, error) {
-	var o Order
-	err := json.Unmarshal([]byte(jsonStr), &o)
-	if err != nil {
-		return nil, err
-	}
-	return &o, nil
+
+
+
+func (i *INvoicetReply) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(i)
+}
+
+func (i *INvoicetReply) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &i)
+}
+
+
+
+
+
+
+
+type Order struct {
+	commons.Foundation
+	ID          uint
+	Customer     Customer
+	Products     []Product
+	
+}
+
+
+type  OrdertReply struct {
+	commons.Foundation
+	Data        *entities.Order
+	Collection  []entities.Order
+	Stream      <-chan entities.Order
+	Error       error
+	ErrorStream <-chan error
+}
+
+
+
+func (o *OrdertReply) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(o)
+}
+
+func (o *OrdertReply) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &o)
 }
 
 
@@ -133,95 +290,63 @@ func fromJSON(jsonStr string) (*Order, error) {
 
 
 type Payment struct {
-	ID         int
-	Order      entities.Order
-	Amount     float64
-	Method     string
-	Status     string
-	CardHolder string
-	CardNumber string
-	ExpiryDate string
-	CVV        string
-	CreatedAt  time.Time
-	UpdatedAt  time.Time
+	commons.Foundation
+		Order      Order
+
 }
 
-func (p *Payment) toJSON() string {
-	data, err := json.Marshal(p)
-	if err != nil {
-		fmt.Println("Error marshaling payment to JSON:", err)
-		return ""
-	}
-	return string(data)
+
+
+
+
+type  PaymentReply struct {
+	commons.Foundation
+	Data        *entities.Payment
+	Collection  []entities.Payment
+	Stream      <-chan entities.Payment
+	Error       error
+	ErrorStream <-chan error
 }
 
-func fromJSON(jsonStr string) (*Payment, error) {
-	var p Payment
-	err := json.Unmarshal([]byte(jsonStr), &p)
-	if err != nil {
-		return nil, err
-	}
-	return &p, nil
+
+
+
+
+func (pa *PaymentReply) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(pa)
 }
+
+
+
+func (pa PaymentReply) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &pa)
+}
+
+
+
+
+
+
+
+
+
 
 
 type Product struct {
-	ID          int
-	Name        string
-	Description string
-	Price       float64
-	Stock       int
-	Category    Category
-	Tags        []string
-	Reviews     []Review
-	Ratings     []Rating
-	Images      []string
-}
-
-func (p *Product) toJSON() string {
-	data, err := json.Marshal(p)
-	if err != nil {
-		fmt.Println("Error marshaling product to JSON:", err)
-		return ""
-	}
-	return string(data)
-}
-
-func fromJSON(jsonStr string) (*Product, error) {
-	var p Product
-	err := json.Unmarshal([]byte(jsonStr), &p)
-	if err != nil {
-		return nil, err
-	}
-	return &p, nil
-}
-
-
-type Receipt struct {
-	common.FoundationEntity
-	ID         int
-	Invoice    Invoice
-	Amount     float64
-	Payment    entities.Payment
+	commons.Foundation
+	Category   Category
 	
 }
 
-func (p *Receipt) toJSON() string {
-	data, err := json.Marshal(p)
-	if err != nil {
-		fmt.Println("Error marshaling Receipt to JSON:", err)
-		return ""
-	}
-	return string(data)
-}
 
-func fromJSON(jsonStr string) (*Receipt, error) {
-	var p Receipt
-	err := json.Unmarshal([]byte(jsonStr), &p)
-	if err != nil {
-		return nil, err
-	}
-	return &p, nil
+
+type  ProductReply struct {
+	commons.Foundation
+	Data        *entities.Product
+	Collection  []entities.Product
+	Stream      <-chan entities.Product
+	Error       error
+	ErrorStream <-chan error
 }
 
 
@@ -230,10 +355,192 @@ func fromJSON(jsonStr string) (*Receipt, error) {
 
 
 
+func (p *Product) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(p)
+}
+
+func (p *Product) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &p)
+}
+
+
+func (pr *ProductReply) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(pr)
+}
+
+func (pr*ProductReply) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &pr)
+}
 
 
 
 
+
+type Receipt struct {
+	commons.Foundation
+	ID     uint
+	Invoice Invoice
+	
+}
+
+type  ReceiptReply struct {
+	commons.Foundation
+	Data        *entities.Receipt
+	Collection  []entities.Receipt
+	Stream      <-chan entities.Receipt
+	Error       error
+	ErrorStream <-chan error
+}
+
+
+
+
+
+
+func (r *Receipt) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(r)
+}
+
+func (r *Receipt) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &r)
+}
+
+func (rr *ReceiptReply) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(rr)
+}
+
+func (rr *ReceiptReply) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &rr)
+}
+
+
+
+
+
+
+
+type Review struct {
+	commons.Foundation
+
+}
+
+type   ReviewReply struct {
+	commons.Foundation
+	Data        *entities.Review
+	Collection  []entities.Review
+	Stream      <-chan entities.Review
+	Error       error
+	ErrorStream <-chan error
+}
+
+
+
+
+
+
+func (r *Review) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(r)
+}
+
+func (r*Review) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &r)
+}
+
+
+
+func (re *ReviewReply) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(re)
+}
+
+func (re *ReviewReply) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &re)
+}
+
+
+
+
+
+
+
+
+type Rating struct {
+	commons.Foundation
+	ProductID uint
+}
+
+type   RatingReply struct {
+	commons.Foundation
+	Data        *entities.Rating
+	Collection  []entities.Rating
+	Stream      <-chan entities.Rating
+	Error       error
+	ErrorStream <-chan error
+}
+
+
+
+
+
+
+func (r *Rating) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(r)
+}
+
+func (r *Rating) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &r)
+}
+
+
+
+func ( ra *RatingReply) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(ra)
+}
+
+func ( ra *RatingReply) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &ra)
+}
+
+
+
+
+
+
+
+
+type CreditCard struct {
+commons.Foundation
+
+}
+
+
+type   CreditCardReply struct {
+	commons.Foundation
+	Data        *entities.CreditCard
+	Collection  []entities.CreditCard
+	Stream      <-chan entities.CreditCard
+	Error       error
+	ErrorStream <-chan error
+}
+
+
+
+func (c *CreditCard) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(c)
+}
+
+func (c *CreditCard) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &c)
+}
+
+
+
+func (ca *CreditCardReply) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(ca)
+}
+
+func (ca *CreditCardReply) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &ca)
+}
 
 
 
