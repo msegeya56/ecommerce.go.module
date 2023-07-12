@@ -1,21 +1,23 @@
-#!/bin/bash
+!/bin/sh
 
-# Get the current version from the module
-version=$(git describe --abbrev=0 --tags)
+# Update go mod
 
-# Increment the version number
-IFS='.' read -r -a version_parts <<< "$version"
-major="${version_parts[0]}"
-minor="${version_parts[1]}"
-patch="${version_parts[2]}"
-minor=$((minor + 1))
-new_version="$major.$minor.$patch"
+go mod tidy
 
-# Create the new tag
-git tag "$new_version"
+# Get the most recent tag
+latest_tag=$(git describe --abbrev=0 --tags)
 
-# Push the new tag to the repository
-git push origin "$new_version"
+# Increment the tag version
+new_tag=$(echo $latest_tag | awk -F. -v OFS=. '{$NF++;print}')
 
-# Push the updates to the 'main' branch
-git push origin main
+# Add the files you want to commit
+
+git add .
+
+# Commit the changes with a descriptive message
+commit_message="Increment tag to $new_tag"
+git commit -m "$commit_message"
+
+# Create the new tag and push it
+git tag $new_tag
+git push origin $new_tag

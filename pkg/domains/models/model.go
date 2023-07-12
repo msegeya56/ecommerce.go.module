@@ -420,6 +420,64 @@ func (re *ReviewReply) FromMsgpack(data []byte) error {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          
+
+
+
+
+
+
+
+
+		  
+
+
+
+
+
 type Rating struct {
 	commons.Foundation
 	ProductID uint `json:"product_id,omitempty"`

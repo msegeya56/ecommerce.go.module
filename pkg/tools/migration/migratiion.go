@@ -2,7 +2,7 @@ package migration
 
 import (
 	"github.com/msegeya56/ecommerce.go.module/pkg/domains/models"
-	"gorm.io/gorm"
+
 )
 
 
