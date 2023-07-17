@@ -1,14 +1,12 @@
 package models
 
 import (
-	
-
 	"github.com/msegeya56/ecommerce.go.module/pkg/domains/entities"
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 	"github.com/vmihailenco/msgpack/v5"
 )
 
-type JSONSerializableu interface{
+type JSONSerializableu interface {
 	ToMsgpack() ([]byte, error)
 	FromMsgpack(data []byte) error
 }
@@ -16,12 +14,9 @@ type JSONSerializableu interface{
 type Category struct {
 	commons.Foundation
 	ProductID uint `json:"product_id,omitempty"`
+}
 
-} 
-
-
-
-type  CategoryReply struct {
+type CategoryReply struct {
 	commons.Foundation
 	Data        *entities.Category
 	Collection  []entities.Category
@@ -29,8 +24,6 @@ type  CategoryReply struct {
 	Error       error
 	ErrorStream <-chan error
 }
-
-
 
 func (c *CategoryReply) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(c)
@@ -40,19 +33,14 @@ func (c *CategoryReply) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &c)
 }
 
-
-
-
-
 type Checkout struct {
 	commons.Foundation
-    OrderID uint `json:"order_id,omitempty"`
-	DepositID uint `json:"deposit_id,omitempty"`
-	CreditLimitID uint `json:"credit_limit_id,omitempty"`
-
+	OrderID       uint `json:"order_id,omitempty"`
+	DepositID     uint `json:"deposit_id,omitempty"`
+	CreditlimitID uint `json:"credit_limit_id,omitempty"`
 }
 
-type  CheckoutReply struct {
+type CheckoutReply struct {
 	commons.Foundation
 	Data        *entities.Checkout
 	Collection  []entities.Checkout
@@ -60,10 +48,6 @@ type  CheckoutReply struct {
 	Error       error
 	ErrorStream <-chan error
 }
-
-
-
-
 
 func (ch *CheckoutReply) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(ch)
@@ -73,58 +57,33 @@ func (ch *CheckoutReply) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &ch)
 }
 
-
-
-
-
-
-
-
-
-
-type CreditLimit struct {
+type Creditlimit struct {
 	commons.Foundation
-    DepositID  uint `json:"deposit_id,omitempty"`
-
+	DepositID uint `json:"deposit_id,omitempty"`
 }
 
-
-type  CreditLimitReply struct {
+type CreditlimitReply struct {
 	commons.Foundation
-	Data        *entities.CreditLimit
-	Collection  []entities.CreditLimit
-	Stream      <-chan entities.CreditLimit
+	Data        *entities.Creditlimit
+	Collection  []entities.Creditlimit
+	Stream      <-chan entities.Creditlimit
 	Error       error
 	ErrorStream <-chan error
 }
 
-
-
-
-
-
-func (cl *CreditLimitReply) ToMsgpack() ([]byte, error) {
+func (cl *CreditlimitReply) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(cl)
 }
 
-func (cl *CreditLimitReply) FromMsgpack(data []byte) error {
+func (cl *CreditlimitReply) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &cl)
 }
 
-
-
-
-
-
-
-
 type Customer struct {
 	commons.Foundation
-	
 }
 
-
-type  CustomerReply struct {
+type CustomerReply struct {
 	commons.Foundation
 	Data        *entities.Customer
 	Collection  []entities.Customer
@@ -132,15 +91,6 @@ type  CustomerReply struct {
 	Error       error
 	ErrorStream <-chan error
 }
-
-
-
-
-
-
-
-
-
 
 func (c *CustomerReply) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(c)
@@ -150,25 +100,13 @@ func (c *CustomerReply) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &c)
 }
 
-
-
-
-
-
-
-
-
-
-
 type Deposit struct {
 	commons.Foundation
-	CustomerID uint `json:"customer_id,omitempty"`
+	CustomerID   uint `json:"customer_id,omitempty"`
 	CreditCardID uint `json:"credit_card_id,omitempty"`
 }
 
-
-
-type  DepositReply struct {
+type DepositReply struct {
 	commons.Foundation
 	Data        *entities.Deposit
 	Collection  []entities.Deposit
@@ -176,11 +114,6 @@ type  DepositReply struct {
 	Error       error
 	ErrorStream <-chan error
 }
-
-
-
-
-
 
 func (d *DepositReply) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(d)
@@ -190,19 +123,12 @@ func (d *Deposit) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &d)
 }
 
-
-
-
-
-
-
 type Invoice struct {
 	commons.Foundation
-	Order      Order
-	
+	Order Order
 }
 
-type  INvoicetReply struct {
+type INvoicetReply struct {
 	commons.Foundation
 	Data        *entities.Deposit
 	Collection  []entities.Deposit
@@ -210,9 +136,6 @@ type  INvoicetReply struct {
 	Error       error
 	ErrorStream <-chan error
 }
-
-
-
 
 func (i *INvoicetReply) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(i)
@@ -222,21 +145,13 @@ func (i *INvoicetReply) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &i)
 }
 
-
-
-
-
-
-
 type Order struct {
 	commons.Foundation
-	CustomerID   uint `json:"customer_id,omitempty"`
-	Products     []Product
-	
+	CustomerID uint `json:"customer_id,omitempty"`
+	Products   []Product
 }
 
-
-type  OrdertReply struct {
+type OrdertReply struct {
 	commons.Foundation
 	Data        *entities.Order
 	Collection  []entities.Order
@@ -244,8 +159,6 @@ type  OrdertReply struct {
 	Error       error
 	ErrorStream <-chan error
 }
-
-
 
 func (o *OrdertReply) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(o)
@@ -255,23 +168,14 @@ func (o *OrdertReply) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &o)
 }
 
-
-
-
-
-
 type Payment struct {
 	commons.Foundation
-	CustomerID uint `json:"customer_id,omitempty"`
-    OrderID  uint `json:"order_id,omitempty"`
-    CreditCardID uint `json:"credit_card_id,omitempty"`
+	CustomerID   uint `json:"customer_id,omitempty"`
+	OrderID      uint `json:"order_id,omitempty"`
+	CreditCardID uint `json:"credit_card_id,omitempty"`
 }
 
-
-
-
-
-type  PaymentReply struct {
+type PaymentReply struct {
 	commons.Foundation
 	Data        *entities.Payment
 	Collection  []entities.Payment
@@ -280,40 +184,21 @@ type  PaymentReply struct {
 	ErrorStream <-chan error
 }
 
-
-
-
-
 func (pa *PaymentReply) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(pa)
 }
-
-
 
 func (pa PaymentReply) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &pa)
 }
 
-
-
-
-
-
-
-
-
-
-
 type Product struct {
 	commons.Foundation
 	CustomerID uint `json:"customer_id,omitempty"`
 	CategoryID uint `json:"category_id,omitempty"`
-	
 }
 
-
-
-type  ProductReply struct {
+type ProductReply struct {
 	commons.Foundation
 	Data        *entities.Product
 	Collection  []entities.Product
@@ -322,34 +207,21 @@ type  ProductReply struct {
 	ErrorStream <-chan error
 }
 
-
-
-
-
-
-
-
-
 func (pr *ProductReply) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(pr)
 }
 
-func (pr*ProductReply) FromMsgpack(data []byte) error {
+func (pr *ProductReply) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &pr)
 }
 
-
-
-
-
 type Receipt struct {
 	commons.Foundation
-	PaymentID uint  `json:"payment_id,omitempty"`
+	PaymentID uint `json:"payment_id,omitempty"`
 	InvoiceID uint `json:"invoice_id,omitempty"`
-	
 }
 
-type  ReceiptReply struct {
+type ReceiptReply struct {
 	commons.Foundation
 	Data        *entities.Receipt
 	Collection  []entities.Receipt
@@ -357,11 +229,6 @@ type  ReceiptReply struct {
 	Error       error
 	ErrorStream <-chan error
 }
-
-
-
-
-
 
 func (r *Receipt) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(r)
@@ -379,19 +246,12 @@ func (rr *ReceiptReply) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &rr)
 }
 
-
-
-
-
-
-
 type Review struct {
 	commons.Foundation
 	CustomerID uint `json:"customer_id,omitempty"`
-
 }
 
-type   ReviewReply struct {
+type ReviewReply struct {
 	commons.Foundation
 	Data        *entities.Review
 	Collection  []entities.Review
@@ -399,11 +259,6 @@ type   ReviewReply struct {
 	Error       error
 	ErrorStream <-chan error
 }
-
-
-
-
-
 
 func (re *ReviewReply) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(re)
@@ -413,66 +268,26 @@ func (re *ReviewReply) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &re)
 }
 
+type Creditcard struct {
+	commons.Foundation
+}
 
+type CreditcardReply struct {
+	commons.Foundation
+	Data        *entities.Creditcard
+	Collection  []entities.Creditcard
+	Stream      <-chan entities.Creditcard
+	Error       error
+	ErrorStream <-chan error
+}
 
+func (cc *CreditcardReply) ToMsgpack() ([]byte, error) {
+	return msgpack.Marshal(cc)
+}
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-          
-
-
-
-
-
-
-
-
-		  
+func (cc *CreditcardReply) FromMsgpack(data []byte) error {
+	return msgpack.Unmarshal(data, &cc)
+}
 
 
 
@@ -483,7 +298,7 @@ type Rating struct {
 	ProductID uint `json:"product_id,omitempty"`
 }
 
-type   RatingReply struct {
+type RatingReply struct {
 	commons.Foundation
 	Data        *entities.Rating
 	Collection  []entities.Rating
@@ -492,54 +307,12 @@ type   RatingReply struct {
 	ErrorStream <-chan error
 }
 
-
-
-
-
-
-
-func ( ra *RatingReply) ToMsgpack() ([]byte, error) {
+func (ra *RatingReply) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(ra)
 }
 
-func ( ra *RatingReply) FromMsgpack(data []byte) error {
+func (ra *RatingReply) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &ra)
-}
-
-
-
-
-
-
-
-
-type CreditCard struct {
-commons.Foundation
-
-
-}
-
-
-type   CreditCardReply struct {
-	commons.Foundation
-	Data        *entities.CreditCard
-	Collection  []entities.CreditCard
-	Stream      <-chan entities.CreditCard
-	Error       error
-	ErrorStream <-chan error
-}
-
-
-
-
-
-
-func (ca *CreditCardReply) ToMsgpack() ([]byte, error) {
-	return msgpack.Marshal(ca)
-}
-
-func (ca *CreditCardReply) FromMsgpack(data []byte) error {
-	return msgpack.Unmarshal(data, &ca)
 }
 
 

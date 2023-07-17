@@ -7,21 +7,19 @@ import (
 	"github.com/vmihailenco/msgpack/v5"
 )
 
-type JSONSerializableu interface{
+type JSONSerializableu interface {
 	ToMsgpack() ([]byte, error)
 	FromMsgpack(data []byte) error
 }
 
-
-
 type Category struct {
 	commons.FoundationEntity
-	ID          uint
-	Name         string
-	Description  string
-	Parent       *Category
+	ID            uint
+	Name          string
+	Description   string
+	Parent        *Category
 	Subcategories []Category
-	Products     []Product
+	Products      []Product
 }
 
 func (c *Category) ToMsgpack() ([]byte, error) {
@@ -35,12 +33,12 @@ func (c *Category) FromMsgpack(data []byte) error {
 type Checkout struct {
 	commons.FoundationEntity
 	ID        uint
-	Customer   Customer
-	Products   []Product
-	Total      float64
-	Discount   float64
-	PromoCode  string
-	Completed  bool
+	Customer  Customer
+	Products  []Product
+	Total     float64
+	Discount  float64
+	PromoCode string
+	Completed bool
 }
 
 func (ch *Checkout) ToMsgpack() ([]byte, error) {
@@ -50,25 +48,25 @@ func (ch *Checkout) ToMsgpack() ([]byte, error) {
 func (ch *Checkout) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &ch)
 }
-type CreditLimit struct {
+
+type Creditlimit struct {
 	commons.FoundationEntity
-	Customer   Customer
-	Limit      float64
-	Used       float64
+	Customer Customer
+	Limit    float64
+	Used     float64
 }
 
-
-func (cl *CreditLimit) ToMsgpack() ([]byte, error) {
+func (cl *Creditlimit) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(cl)
 }
 
-func (cl *CreditLimit) FromMsgpack(data []byte) error {
+func (cl *Creditlimit) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &cl)
 }
 
 type Customer struct {
 	commons.FoundationEntity
-	ID              uint
+	ID               uint
 	Username         string
 	Email            string
 	Password         string
@@ -78,7 +76,7 @@ type Customer struct {
 	Orders           []Order
 	Wishlist         []Product
 	Reviews          []Review
-	CreditCard       CreditCard
+	Creditcardd      Creditcard
 	ShippingAddress  string
 	BillingAddress   string
 	ProfilePicture   string
@@ -97,7 +95,7 @@ func (c *Customer) FromMsgpack(data []byte) error {
 
 type Deposit struct {
 	commons.FoundationEntity
-	ID      uint
+	ID       uint
 	Customer Customer
 	Amount   float64
 }
@@ -112,7 +110,7 @@ func (d *Deposit) FromMsgpack(data []byte) error {
 
 type Invoice struct {
 	commons.FoundationEntity
-	ID        uint
+	ID         uint
 	Order      Order
 	Amount     float64
 	IssuedDate time.Time
@@ -133,7 +131,7 @@ func (i *Invoice) FromMsgpack(data []byte) error {
 
 type Order struct {
 	commons.FoundationEntity
-	ID          uint
+	ID           uint
 	Customer     Customer
 	Products     []Product
 	TotalPrice   float64
@@ -154,13 +152,12 @@ func (o *Order) FromMsgpack(data []byte) error {
 
 type Payment struct {
 	commons.FoundationEntity
-	ID        uint
-	Order      Order
-	Amount     float64
-	Method     string
-	Status     string
-	CreditCard CreditCard
-	
+	ID          uint
+	Order       Order
+	Amount      float64
+	Method      string
+	Status      string
+	Creditcardd Creditcard
 }
 
 func (p *Payment) ToMsgpack() ([]byte, error) {
@@ -173,11 +170,11 @@ func (p *Payment) FromMsgpack(data []byte) error {
 
 type Product struct {
 	commons.FoundationEntity
-	ID         uint
+	ID          uint
 	Name        string
 	Description string
 	Price       float64
-	Stock      uint
+	Stock       uint
 	Category    Category
 	Tags        []string
 	Reviews     []Review
@@ -195,9 +192,9 @@ func (p *Product) FromMsgpack(data []byte) error {
 
 type Receipt struct {
 	commons.FoundationEntity
-	ID     uint
-	Invoice Invoice
-	Amount  float64
+	ID       uint
+	Invoice  Invoice
+	Amount   float64
 	Payments []Payment
 }
 
@@ -210,12 +207,12 @@ func (r *Receipt) FromMsgpack(data []byte) error {
 }
 
 type Review struct {
-	ID       uint
-	UserID   uint
+	ID        uint
+	UserID    uint
 	ProductID uint
-	Rating   float64
-	Comment  string
-	Date     time.Time
+	Rating    float64
+	Comment   string
+	Date      time.Time
 }
 
 func (r *Review) ToMsgpack() ([]byte, error) {
@@ -240,26 +237,17 @@ func (r *Rating) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &r)
 }
 
-type CreditCard struct {
+type Creditcard struct {
 	CardNumber     string
 	CardholderName string
 	ExpirationDate string
 	CVV            string
 }
 
-func (c *CreditCard) ToMsgpack() ([]byte, error) {
+func (c *Creditcard) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(c)
 }
 
-func (c *CreditCard) FromMsgpack(data []byte) error {
+func (c *Creditcard) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &c)
 }
-
-
-
-
-
-
-
-
-

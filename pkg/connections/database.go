@@ -5,18 +5,14 @@ import (
 	"gorm.io/gorm"
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/domains/models"
-	
 )
-
-
 
 var Db *gorm.DB
 
 // NewSQLiteConnection creates a new SQLite database connection using go
 
-
 func NewSQLiteConnection(dbPath string) (*gorm.DB, error) {
-Db, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{})
+	Db, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{})
 	if err != nil {
 		return nil, err
 	}
@@ -25,7 +21,7 @@ Db, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{})
 	err = Db.AutoMigrate(
 		&models.Category{},
 		&models.Checkout{},
-		&models.CreditLimit{},
+		&models.Creditlimit{},
 		&models.Customer{},
 		&models.Deposit{},
 		&models.Invoice{},
@@ -35,11 +31,34 @@ Db, err := gorm.Open(sqlite.Open(dbPath), &gorm.Config{})
 		&models.Receipt{},
 		&models.Review{},
 		&models.Rating{},
-		&models.CreditCard{},
+		&models.Creditcard{},
 	)
 	if err != nil {
 		return nil, err
 	}
 
 	return Db, nil
+}
+
+func SyncToDB(db *gorm.DB) error {
+	err := db.AutoMigrate(
+		&models.Customer{},
+		&models.Category{},
+		&models.Checkout{},
+		&models.Creditlimit{},
+		&models.Deposit{},
+		&models.Invoice{},
+		&models.Order{},
+		&models.Payment{},
+		&models.Product{},
+		&models.Receipt{},
+		&models.Review{},
+		&models.Rating{},
+		&models.Creditcard{},
+	)
+	if err != nil {
+		return err
+	}
+
+	return nil
 }
