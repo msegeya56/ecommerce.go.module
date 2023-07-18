@@ -1,6 +1,8 @@
 package models
 
 import (
+	"time"
+
 	"github.com/msegeya56/ecommerce.go.module/pkg/domains/entities"
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 	"github.com/vmihailenco/msgpack/v5"
@@ -13,7 +15,12 @@ type JSONSerializableu interface {
 
 type Category struct {
 	commons.Foundation
-	ProductID uint `json:"product_id,omitempty"`
+	ID            uint
+	Name          string
+	Description   string
+	Parent        *Category
+	Subcategories []Category
+	Products      []Product
 }
 
 type CategoryReply struct {
@@ -35,9 +42,13 @@ func (c *CategoryReply) FromMsgpack(data []byte) error {
 
 type Checkout struct {
 	commons.Foundation
-	OrderID       uint `json:"order_id,omitempty"`
-	DepositID     uint `json:"deposit_id,omitempty"`
-	CreditlimitID uint `json:"credit_limit_id,omitempty"`
+	ID        uint
+	Customer  Customer
+	Products  []Product
+	Total     float64
+	Discount  float64
+	PromoCode string
+	Completed bool
 }
 
 type CheckoutReply struct {
@@ -59,7 +70,13 @@ func (ch *CheckoutReply) FromMsgpack(data []byte) error {
 
 type Creditlimit struct {
 	commons.Foundation
-	DepositID uint `json:"deposit_id,omitempty"`
+	ID        uint
+	Customer  Customer
+	Products  []Product
+	Total     float64
+	Discount  float64
+	PromoCode string
+	Completed bool
 }
 
 type CreditlimitReply struct {
@@ -81,6 +98,23 @@ func (cl *CreditlimitReply) FromMsgpack(data []byte) error {
 
 type Customer struct {
 	commons.Foundation
+	ID               uint        `json:"id"`
+	Username         string      `json:"username"`
+	Email            string      `json:"email"`
+	Password         string      `json:"password"`
+	FullName         string      `json:"fullName"`
+	Phone            string      `json:"phone"`
+	Address          string      `json:"address"`
+	Orders           []Order     `json:"orders"`
+	Wishlist         []Product   `json:"wishlist"`
+	Reviews          []Review    `json:"reviews"`
+	Creditcardd     Creditcard  `json:"creditCard"`
+	ShippingAddress  string      `json:"shippingAddress"`
+	BillingAddress   string      `json:"billingAddress"`
+	ProfilePicture   string      `json:"profilePicture"`
+	AccountBalance   float64     `json:"accountBalance"`
+	LastLogin        time.Time   `json:"lastLogin"`
+	
 }
 
 type CustomerReply struct {
@@ -100,10 +134,15 @@ func (c *CustomerReply) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &c)
 }
 
+
+
+
+
 type Deposit struct {
 	commons.Foundation
-	CustomerID   uint `json:"customer_id,omitempty"`
-	CreditCardID uint `json:"credit_card_id,omitempty"`
+	ID       uint          `json:"id"`
+	Customer Customer     `json:"customer"`
+	Amount   float64      `json:"a,oumt"`
 }
 
 type DepositReply struct {
@@ -124,15 +163,29 @@ func (d *Deposit) FromMsgpack(data []byte) error {
 }
 
 type Invoice struct {
-	commons.Foundation
-	Order Order
+               commons.Foundation
+	ID           uint      `json:"id"`
+	Order        Order     `json:"order"`
+	Amount       float64   `json:"amount"`
+	IssuedDate   time.Time `json:"issuedDate"`
+	DueDate      time.Time `json:"dueDate"`
+	Status       string    `json:"status"`
+	Paid         bool      `json:"paid"`
+	Payment      Payment   `json:"payment"`
+	InvoiceURL   string    `json:"invoiceURL"`
+
 }
+
+
+
+
+
 
 type INvoicetReply struct {
 	commons.Foundation
-	Data        *entities.Deposit
-	Collection  []entities.Deposit
-	Stream      <-chan entities.Deposit
+	Data        *entities.Invoice
+	Collection  []entities.Invoice
+	Stream      <-chan entities.Invoice
 	Error       error
 	ErrorStream <-chan error
 }
@@ -147,8 +200,15 @@ func (i *INvoicetReply) FromMsgpack(data []byte) error {
 
 type Order struct {
 	commons.Foundation
-	CustomerID uint `json:"customer_id,omitempty"`
-	Products   []Product
+	ID           uint      `json:"id"`
+	Customer     Customer  `json:"customer"`
+	Products     []Product `json:"products"`
+	TotalPrice   float64   `json:"total_price"`
+	ShippingCost float64   `json:"shipping_cost"`
+	Discount     float64   `json:"discount"`
+	Status       string    `json:"status"`
+	Payment      []Payment `json:"payment"`
+	Invoices     []Invoice `json:"invoices"`
 }
 
 type OrdertReply struct {
@@ -170,9 +230,12 @@ func (o *OrdertReply) FromMsgpack(data []byte) error {
 
 type Payment struct {
 	commons.Foundation
-	CustomerID   uint `json:"customer_id,omitempty"`
-	OrderID      uint `json:"order_id,omitempty"`
-	CreditCardID uint `json:"credit_card_id,omitempty"`
+	ID           uint       `json:"id"`
+	Order        Order      `json:"order"`
+	Amount       float64    `json:"amount"`
+	Method       string     `json:"method"`
+	Status       string     `json:"status"`
+	Creditcard   Creditcard `json:"credit_card"`
 }
 
 type PaymentReply struct {
@@ -194,8 +257,16 @@ func (pa PaymentReply) FromMsgpack(data []byte) error {
 
 type Product struct {
 	commons.Foundation
-	CustomerID uint `json:"customer_id,omitempty"`
-	CategoryID uint `json:"category_id,omitempty"`
+	ID          uint     `json:"id"`
+	Name        string   `json:"name"`
+	Description string   `json:"description"`
+	Price       float64  `json:"price"`
+	Stock       uint     `json:"stock"`
+	Category    Category `json:"category"`
+	Tags        []string `json:"tags"`
+	Reviews     []Review `json:"reviews"`
+	Ratings     []Rating `json:"ratings"`
+	Images      []string `json:"images"`
 }
 
 type ProductReply struct {
@@ -217,8 +288,12 @@ func (pr *ProductReply) FromMsgpack(data []byte) error {
 
 type Receipt struct {
 	commons.Foundation
-	PaymentID uint `json:"payment_id,omitempty"`
-	InvoiceID uint `json:"invoice_id,omitempty"`
+	ID       uint     `json:"id"`
+	Invoice  Invoice  `json:"invoice"`
+	Amount   float64  `json:"amount"`
+	Payments []Payment `json:"payments"`
+
+
 }
 
 type ReceiptReply struct {
@@ -248,7 +323,14 @@ func (rr *ReceiptReply) FromMsgpack(data []byte) error {
 
 type Review struct {
 	commons.Foundation
-	CustomerID uint `json:"customer_id,omitempty"`
+	ID        uint      `json:"id"`
+	UserID    uint      `json:"userId"`
+	ProductID uint      `json:"productId"`
+	Rating    float64   `json:"rating"`
+	Comment   string    `json:"comment"`
+	Date      time.Time `json:"date"`
+
+
 }
 
 type ReviewReply struct {
@@ -270,6 +352,10 @@ func (re *ReviewReply) FromMsgpack(data []byte) error {
 
 type Creditcard struct {
 	commons.Foundation
+	CardNumber     string `json:"card_number"`
+	CardholderName string `json:"cardholder_name"`
+	ExpirationDate string `json:"expiration_date"`
+	CVV            string `json:"cvv"`
 }
 
 type CreditcardReply struct {
@@ -289,14 +375,13 @@ func (cc *CreditcardReply) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &cc)
 }
 
-
-
-
-
 type Rating struct {
 	commons.Foundation
-	ProductID uint `json:"product_id,omitempty"`
+	ProductID uint    `json:"productId"`
+	Average   float64 `json:"average"`
+	Count     uint    `json:"count"`
 }
+
 
 type RatingReply struct {
 	commons.Foundation
@@ -314,6 +399,3 @@ func (ra *RatingReply) ToMsgpack() ([]byte, error) {
 func (ra *RatingReply) FromMsgpack(data []byte) error {
 	return msgpack.Unmarshal(data, &ra)
 }
-
-
-

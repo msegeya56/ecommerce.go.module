@@ -40,25 +40,3 @@ func NewSQLiteConnection(dbPath string) (*gorm.DB, error) {
 	return Db, nil
 }
 
-func SyncToDB(db *gorm.DB) error {
-	err := db.AutoMigrate(
-		&models.Customer{},
-		&models.Category{},
-		&models.Checkout{},
-		&models.Creditlimit{},
-		&models.Deposit{},
-		&models.Invoice{},
-		&models.Order{},
-		&models.Payment{},
-		&models.Product{},
-		&models.Receipt{},
-		&models.Review{},
-		&models.Rating{},
-		&models.Creditcard{},
-	)
-	if err != nil {
-		return err
-	}
-
-	return nil
-}

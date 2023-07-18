@@ -110,16 +110,18 @@ func (d *Deposit) FromMsgpack(data []byte) error {
 
 type Invoice struct {
 	commons.FoundationEntity
-	ID         uint
-	Order      Order
-	Amount     float64
-	IssuedDate time.Time
-	DueDate    time.Time
-	Status     string
-	Paid       bool
-	Payment    Payment
-	InvoiceURL string
+	ID   uint    `json:"id"`
+	OrderID     uint    `json:"order_id"`
+	Amount      float64 `json:"amount"`
+	IssuedDate  string  `json:"issued_date"`
+	DueDate     string  `json:"due_date"`
+	Status      string  `json:"status"`
+	Paid        bool    `json:"paid"`
+	PaymentID   uint    `json:"payment_id"`
+	InvoiceURL  string  `json:"invoice_url"`
 }
+
+
 
 func (i *Invoice) ToMsgpack() ([]byte, error) {
 	return msgpack.Marshal(i)
@@ -207,6 +209,7 @@ func (r *Receipt) FromMsgpack(data []byte) error {
 }
 
 type Review struct {
+	commons.FoundationEntity
 	ID        uint
 	UserID    uint
 	ProductID uint
@@ -238,6 +241,7 @@ func (r *Rating) FromMsgpack(data []byte) error {
 }
 
 type Creditcard struct {
+	commons.FoundationEntity
 	CardNumber     string
 	CardholderName string
 	ExpirationDate string
