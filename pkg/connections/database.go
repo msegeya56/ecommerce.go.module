@@ -39,4 +39,3 @@ func NewSQLiteConnection(dbPath string) (*gorm.DB, error) {
 
 	return Db, nil
 }
-
