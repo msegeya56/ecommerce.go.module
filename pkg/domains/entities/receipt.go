@@ -17,22 +17,22 @@ import (
 
 type Receipt struct {
 	commons.Foundation
-	ID          uint        `gorm:"column:id;type:varint;size:255"`   
-	CustomerID  uint        `gorm:"column:customer_id;type:varint;size:255"`
-    OrderID       uint    `gorm:"column:order_id;type;varint:size255"`       // ID of the associated order
-    Items         []ReceiptItem  `gorm:"column:items;type:varchar;size:255"`                                       
-    Subtotal      float64         `gorm:"column:subtotal;type:float64;size:255"`
-    Tax           float64         `gorm:"column:tax;type:float64;size:255"`
-    Discount      float64         `gorm:"column:discount;type:float64;size:255"`
-    TotalAmount   float64         `gorm:"column:total_amount;type:float64;size"`
-    PaymentMethod string           `gorm:"column:payment_method;type:string;size:255"`
-    TransactionDate time.Time       `gorm:"column:transactionDate;type:time.Time;size:255"`
+	ID          uint        `json:"id"`   
+	CustomerID  uint        `json:"customer_id"`
+    OrderID       uint    `json:"order_id"`       // ID of the associated order
+    Items         []ReceiptItem  `json:"items"`                                       
+    Subtotal      float64         `json:"subtotal"`
+    Tax           float64         `json:"tax"`
+    Discount      float64         `json:"discount"`
+    TotalAmount   float64         `json:"total_amount"`
+    PaymentMethod string           `json:"payment_method"`
+    TransactionDate time.Time       `json:"transactionDate"`
 }
 
 type ReceiptItem struct {
-    ProductName  string   `gorm:"column:product_name;type:string;size:255"`
-    Quantity     int       `grorm:"column:quantity;type:255"`
-     Subtotal     float64     `gorm:"column:subtotal;type:float64;size:255"`
+    ProductName  string   `json:"product_name"`
+    Quantity     int       `json:"quantity"`
+     Subtotal     float64     `json:"subtotal5"`
 }
 
 

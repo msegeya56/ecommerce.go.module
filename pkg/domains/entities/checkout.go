@@ -15,13 +15,13 @@ import (
 
 type Checkout struct {
 	commons.Foundation
-	ID          uint        `gorm:"column:id;type:varint;size:255"`   
-	CustomerID  uint        `gorm:"column:customer_id;type:varint;size:255"`
-     Products  []Product     `gorm:"column:products;type:varint;size:255"`
-	Total     float64        `gorm:"column:total;type:float64:varint:size:255"`
-	Discount  float64        `gorm:"column:discount;type:float64:varint:size :f255"`
-	PromoCode string         `gorm:"column:promo_code;type:string;varchar:size;size:255"`
-	Completed bool           `gorm:"column:completed;type:text;varchar:size;size:255"`
+	ID          uint        `json:"id"`   
+	CustomerID  uint        `json:"customer_id"`
+     Products  []Product     `json:"products"`
+	Total     float64        `json:"total"`
+	Discount  float64        `json:"discount"`
+	PromoCode string         `json:"promo_code"`
+	Completed bool           `json:"completed:"`
 }
 
 

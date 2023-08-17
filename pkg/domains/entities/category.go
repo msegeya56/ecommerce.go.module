@@ -15,13 +15,13 @@ import (
 
 
 type Category struct {
-	commons.Foundation
-	ID          uint           `gorm:"column:id;type:varchar;size:255"`   
-	Name          string       `gorm:"column:name;type:varchar;size:255"`
-	Description   string     `  gorm:"column:description;type:varchar;size:255"`
-	Parent        *Category    `gorm:"column:parent;type:varchar;size:size:255"`
-	Subcategories []Category    `gorm:"column:subcategories;type:varcharsize:255"`
-	Products      []Product    `gorm:"column:products;type:varchar;size:255"`
+	commons.FoundationEntity
+	ID          uint           `json:"id;"`   
+	Name          string       `json:"name"`
+	Description   string       `json:"description"`
+	Parent        *Category    `json:"parent"`
+	Subcategories []Category    `json:"subcategories"`
+	Products      []Product    `json:"products"`
 }
 
 
@@ -32,6 +32,7 @@ type Category struct {
 
 
 type CategoryReply struct {
+	
 	Data       *Category
 	Collection []Category
 	streams    <-chan Category

@@ -16,17 +16,17 @@ import (
 
 type Payment struct {
 	commons.FoundationEntity
-	ID           uint       `gorm:"column:id;type:varchar;size:255"`
-	OrderID       uint     `gorm:"column:order_id;type:varchar;size:255"`
-	Amount       float64    `gorm:"column:amount;type:varchar;size:255"`
-	Method       string     `gorm:"column:method;type:varchar;size:255"`
-	Status       string      `gorm:"column:status;type:varchar;size:255"`
-	Creditcard   Creditcard   `gorm:"column:credit;type:varchar;size:255"`
+	ID           uint       `json:"id"`
+	OrderID       uint     `json:":order_id"`
+	Amount       float64    `json:"amount"`
+	Method       string     `json:"method"`
+	Status       string      `json:"status"`
+	Creditcard   Creditcard   `json:"creditcard"`
 	
 }
 
 type PaymentReply struct {
-	commons.Foundation
+	
 	Data        *Payment
 	collection  []Payment
 	Stream      <-chan Payment

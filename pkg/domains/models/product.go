@@ -30,7 +30,7 @@ type Product struct {
 }
 
 type ProductReply struct {
-	commons.Foundation
+	
 	Data        *entities.Product
 	collection  []entities.Product
 	Stream      <-chan entities.Product

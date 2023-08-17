@@ -13,18 +13,18 @@ import (
 
 type Rating struct {
 	commons.FoundationEntity
-	ID          uint    `gorm:"column:id;type:varchar;size:255"`
-    CustomerID uint      `gorm:"column:customer_id;type:varchar;type:varchar;size:255"`
-    ProductID  uint      `gorm:"column:product_id;type:varchar;size:255"`
-    OrderID    uint      `gorm:"column:order_id;type:varchar;size:255"`
-    Rating     int       `gorm:"column:rating;type:varchar;size:255"`
-    Comment    string      `gorm:"column:comment;type:varchar;size:255"`
+	ID          uint    `json:"id"`
+    CustomerID uint      `json:"customer_id"`
+    ProductID  uint      `json:"product_id"`
+    OrderID    uint      `json:"order_id"`
+    Rating     int       `json:"rating"`
+    Comment    string      `json:"comment"`
 }
 
 
 
 type RatingReply struct {
-	commons.FoundationEntity
+	
 	Data        *Rating
 	collection  []Rating
 	Stream      <-chan Rating

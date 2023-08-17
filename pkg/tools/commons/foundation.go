@@ -1,9 +1,10 @@
 package commons
 
-
 import (
 	"database/sql"
 	"time"
+
+	"gorm.io/gorm"
 )
 
 type DeletedAt sql.NullTime
@@ -25,7 +26,7 @@ type Foundation struct {
 }
 
 type FoundationEntity struct {
-	ID          uint 
+	gorm.Model
 	Name        string
 	Description string
 	Type        string
@@ -34,8 +35,5 @@ type FoundationEntity struct {
 	Data        []byte
 	Document    []byte
 	Events      []byte
-	CreateAt    time.Time
-	UpdatedAt   time.Time
-	DeletedAt   DeletedAt 
 	Timestamp   time.Time
 }

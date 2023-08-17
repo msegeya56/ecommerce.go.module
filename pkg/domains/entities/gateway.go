@@ -6,10 +6,10 @@ import "github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 
 type  Gateway struct {
 	commons.FoundationEntity
-	ID          uint    `gorm:"column:id;type:varchar;size:255"`
-    Name        string `gorm:"column:name;type:varchar;size:255"`
-    Description string  `gorm:"column:description;type:varchar;size:255"`
-    APIKey      string   `gorm:"column:api_key;type:varchar;size:255"`
+	ID          uint    `json:"id"`
+    Name        string `json:"name"`
+    Description string  `json:"description"`
+    APIKey      string   `json:"api_keye"`
 
 	Product      ProductService
 	Order        OrderService

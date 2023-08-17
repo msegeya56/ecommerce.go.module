@@ -17,25 +17,26 @@ import (
 
 type Order struct {
 	commons.FoundationEntity
-	ID           uint         `gorm:"column:id;type:varchar;size:255"`
-	Customer     Customer     `gorm:"column:customer;type:varchar;size:255"` 
-	Products     []Product    `gorm:"column:products;type:varchar;size:255"`
-	TotalPrice   float64        `gorm:"column:total;type:float64:val1;size:255"`
-    Discount     float64         `gorm:"column:id;type:val1;size:255"`
-	Status       string         `gorm:"column:status;type:string;size:255"`
-	Payment      []Payment       `gorm:"column:payment;type:varchar;size:"`
-	InvoiceID      uint          `gorm:"column:id;type:varchar;size:255"`
+	ID           uint         `json:"id"`
+	Customer     Customer     `json:"customer"` 
+	Products     []Product    `json:"products"`
+	TotalPrice   float64        `json:"total_price"`
+    Discount     float64         `json:"discount"`
+	Status       string         `json:"status"`
+	Payment      []Payment       `json:"payment"`
+	InvoiceID      uint          `json:"invoice_id"`
 	
 }
 
 type OrderReply struct {
-	commons.Foundation
+
 	Data        *Order
 	collection  []Order
 	Stream      <-chan Order
 	Error       error
 	ErrorStream <-chan error
 }
+
 
 
 
@@ -138,7 +139,6 @@ func (o *Order) FromResponseBody(r *http.Response) (*Order, error) {
 
 	return o, nil
 }
-
 
 
 

@@ -16,16 +16,12 @@ import (
 
 type Creditcard struct {
     commons.FoundationEntity
-    ID             uint   `gorm:"column:id;primaryKey;autoIncrement"`
-    CardNumber     string `gorm:"column:card_number;type:varchar(25)"`
-    CardholderName string `gorm:"column:card_holder_name;type:varchar(255)"`
-    ExpirationDate string `gorm:"column:expiration_date;type:varchar(255)"`
-    CVV            string `gorm:"column:cvv;type:varchar(10)"`
+    ID             uint    `json:"id;primaryKey;t"`
+  CardNumber     string    `json:"card_number;typ)"`
+   CardholderName string   `json:"card_holder_name"`
+    ExpirationDate string `json:"expiration_date"`
+    CVV          string   `json:"cvv"`
 }
-
-
-
-
 
 
 type CreditcardReply struct {

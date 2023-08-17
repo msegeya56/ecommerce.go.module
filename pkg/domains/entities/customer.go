@@ -11,35 +11,23 @@ import (
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 )
 
-
-
-
 type Customer struct {
 	commons.FoundationEntity
-	ID               uint        `json:"id"`
-	Username         string      `json:"username"`
-	Email            string      `json:"email"`
-	Password         string      `json:"password"`
-	FullName         string      `json:"fullName"`
-	Phone            string      `json:"phone"`
-	Address          string      `json:"address"`
-	Orders           []Order     `json:"orders"`
-	Wishlist         []Product   `json:"wishlist"`
-	Reviews          []Review    `json:"reviews"`
-	Creditcardd     Creditcard  `json:"creditCard"`
-	ShippingAddress  string      `json:"shippingAddress"`
-	BillingAddress   string      `json:"billingAddress"`
-	ProfilePicture   string      `json:"profilePicture"`
-	AccountBalance   float64     `json:"accountBalance"`
-	LastLogin        time.Time   `json:"lastLogin"`
+	ID             uint       `json:"id"`
+	Username       string     `json:"username"`
+	Email          string     `json:"email"`
+	Password       string     `json:"password"`
+	FullName       string     `json:"fullName"`
+	Phone          string     `json:"phone"`
+	Address        string     `json:"address"`
+	Orders         []Order    `json:"orders"`
+	Wishlist       []Product  `json:"wishlist"`
+	Reviews        []Review   `json:"reviews"`
+	Creditcardd    Creditcard `json:"creditCard"`
+	ProfilePicture string     `json:"profilePicture"`
+	AccountBalance float64    `json:"accountBalance"`
+	LastLogin      time.Time  `json:"lastLogin"`
 }
-
-
-
-
-
-
-
 
 type CustomerReply struct {
 	Data       *Customer
@@ -47,7 +35,6 @@ type CustomerReply struct {
 	streams    <-chan Customer
 	Error      error
 }
-
 
 func (c *Customer) ToJson() string {
 	jsonBytes, _ := json.Marshal(c)

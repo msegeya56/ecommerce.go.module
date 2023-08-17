@@ -16,16 +16,16 @@ import (
 
 type Invoice struct {
     commons.FoundationEntity
-    ID           uint        `json:"id" gorm:"column:id;primaryKey;autoIncrement"`
-    CustomerID   uint        `gorm:"column:customer_id;type:varint;size:255"`
-    Order        Order       `json:"order" gorm:"embedded"`
-    Amount       float64     `json:"amount" gorm:"type:double;size:255"`
-    IssuedDate   time.Time   `json:"issuedDate" gorm:"type:datetime"`
-    DueDate      time.Time   `json:"dueDate" gorm:"type:datetime"`
-    Status       string      `json:"status" gorm:"type:varchar(100)"`
+    ID           uint        `json:"id"`
+    CustomerID   uint        `json:":customer_id"`
+    Order        Order       `json:"order"`
+    Amount       float64     `json:"amount"`
+    IssuedDate   time.Time   `json:"issuedDate"`
+    DueDate      time.Time   `json:"dueDate"`
+    Status       string      `json:"status"`
     Paid         bool        `json:"paid"`
-    Payment      Payment     `json:"payment" gorm:"embedded"`
-    InvoiceURL   string      `json:"invoiceURL" gorm:"type:varchar(255)"`
+    Payment      Payment     `json:"paymentd"`
+    InvoiceURL   string      `json:"invoiceURL"`
 
 
 }
@@ -36,7 +36,7 @@ type Invoice struct {
 
 
 type INvoicetReply struct {
-	commons.Foundation
+	
 	Data        *Invoice
 	Collection  []Invoice
 	Stream      <-chan Invoice

@@ -16,9 +16,9 @@ import (
 
 type Deposit struct {
 	commons.FoundationEntity
-	ID          uint        `gorm:"column:id;type:varchar;size:255"`   
-	CustomerID  uint        `gorm:"column:customer_id;type:varint;size:255"`
-	Amount   float64        `gorm:"column:amount;type:val1;size:255"`
+	ID          uint        `json:"id"`   
+	CustomerID  uint        `json:"customer_id"`
+	Amount   float64        `json:"amount"`
 }
 
 
