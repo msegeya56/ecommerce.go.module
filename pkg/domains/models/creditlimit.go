@@ -34,8 +34,9 @@ type Creditlimit struct {
 type CreditlimittReply struct {
 	Data       *entities.Creditlimit
 	Collection []entities.Creditlimit
-	streams    <-chan entities.Creditlimit
+	Stream    <-chan entities.Creditlimit
 	Error      error
+	ErrorStream <-chan error
 }
 
 

@@ -24,15 +24,16 @@ type Product struct {
 	Stock       uint     `gorm:"column:stock;type:varchar;size:255"`
 	Category    Category `gorm:"column:category;type:varchar;size:255"`
 	Tags        []string `gorm:"column:tags;type:varchar;size:255"`
-	Reviews     []Review `gorm:"column:reviews;type:varchar;size:255"`
+	Reviews     []Review `gorm:"foreignKey:ProductID"` // Establish the relationship with reviews
 	Ratings     []Rating `gorm:"column:ratings;type:varchar;size:255"`
 	Images      []string `gorm:"column:images;type:varchar;size:255"`
 }
 
+
 type ProductReply struct {
 	
 	Data        *entities.Product
-	collection  []entities.Product
+	Collection  []entities.Product
 	Stream      <-chan entities.Product
 	Error       error
 	ErrorStream <-chan error

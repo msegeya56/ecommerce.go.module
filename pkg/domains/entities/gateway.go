@@ -115,6 +115,6 @@ type CreditlimitService struct{
 type GatewayReply struct {
 	Data       *Gateway
 	Collection []Gateway
-	streams    <-chan Gateway
+	Streams    <-chan Gateway
 	Error      error
 }

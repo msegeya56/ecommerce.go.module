@@ -3,21 +3,22 @@ package entities
 import (
 	"encoding/json"
 	"errors"
+
 	"fmt"
 	"io"
 	"net/http"
-
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 )
 
 
 
-
+   
 type Creditcard struct {
     commons.FoundationEntity
-    ID             uint    `json:"id;primaryKey;t"`
-  CardNumber     string    `json:"card_number;typ)"`
+    ID             uint    `json:"id"`
+	CustomerID  uint       `json:"customer_id"`
+  CardNumber     string    `json:"card_number"`
    CardholderName string   `json:"card_holder_name"`
     ExpirationDate string `json:"expiration_date"`
     CVV          string   `json:"cvv"`
@@ -27,8 +28,9 @@ type Creditcard struct {
 type CreditcardReply struct {
 	Data       *Creditcard
 	Collection []Creditcard
-	streams    <-chan Creditcard
+	Stream    <-chan Creditcard
 	Error      error
+	ErrorStream <-chan error
 }
 
 

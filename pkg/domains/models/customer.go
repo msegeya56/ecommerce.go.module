@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"time"
+	
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/domains/entities"
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
@@ -24,13 +24,13 @@ type Customer struct {
 	FullName         string      `gorm:"column:fullName;type:varchar;size:255"`
 	Phone            string      `gorm:"column:phone;type:varchar;size:255"`
 	Address          string      `gorm:"column:address;type:varchar;size:255"`
-	Orders           []Order     `gorm:"column:orders;type:varchar;size:255"`
-	Wishlist         []Product   `gorm:"column:wishlist;type:varchar;size:255"`
-	Reviews          []Review    `gorm:"column:reviews;type:varchar;size:255"`
-	Creditcardd     Creditcard  `gorm:"column:creditCard;type:varchar;size:255"`
-	ProfilePicture   string      `gorm:"column:profilePicture;type:varchar;size:255"`
-	AccountBalance   float64     `gorm:"column:accountBalance;type:varchar;size:255"`
-	LastLogin        time.Time   `gorm:"column:lastLogin;type:varchar;size:255"`
+	Orders   []Order             `gorm:"foreignKey:CustomerID"`
+	Wishlist []Product           `gorm:"foreignKey:CustomerID"`
+    Reviews []Review              `gorm:"foreignKey:CustomerID"`
+	Creditcardd Creditcard        `gorm:"foreignKey:CustomerID"`
+    ProfilePicture   string       `gorm:"column:profilePicture;type:varchar;size:255"`
+	AccountBalance   float64      `gorm:"column:accountBalance;type:varchar;size:255"`
+
 }
 
 
@@ -43,8 +43,9 @@ type Customer struct {
 type CustomerReply struct {
 	Data       *entities.Customer
 	Collection []entities.Customer
-	streams    <-chan entities.Customer
+	Stream    <-chan entities.Customer
 	Error      error
+	ErrorStream <-chan error
 }
 
 

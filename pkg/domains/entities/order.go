@@ -18,6 +18,7 @@ import (
 type Order struct {
 	commons.FoundationEntity
 	ID           uint         `json:"id"`
+	CustomerID  uint         `json:":Customer_id"`
 	Customer     Customer     `json:"customer"` 
 	Products     []Product    `json:"products"`
 	TotalPrice   float64        `json:"total_price"`
@@ -31,7 +32,7 @@ type Order struct {
 type OrderReply struct {
 
 	Data        *Order
-	collection  []Order
+	Collection  []Order
 	Stream      <-chan Order
 	Error       error
 	ErrorStream <-chan error

@@ -14,20 +14,26 @@ import (
 
 
 
-
 type Receipt struct {
 	commons.Foundation
-	ID          uint        `json:"id"`   
-	CustomerID  uint        `json:"customer_id"`
-    OrderID       uint    `json:"order_id"`       // ID of the associated order
-    Items         []ReceiptItem  `json:"items"`                                       
-    Subtotal      float64         `json:"subtotal"`
-    Tax           float64         `json:"tax"`
-    Discount      float64         `json:"discount"`
-    TotalAmount   float64         `json:"total_amount"`
-    PaymentMethod string           `json:"payment_method"`
-    TransactionDate time.Time       `json:"transactionDate"`
+	ID             uint           `json:"id"`
+	CustomerID     uint           `json:"customer_id"`
+	Customer       Customer       `gorm:"foreignKey:CustomerID" json:"customer"`
+	OrderID        uint           `json:"order_id"`
+	Order          Order          `gorm:"foreignKey:OrderID" json:"order"`
+	Items          []ReceiptItem  `json:"items"`
+	Subtotal       float64        `json:"subtotal"`
+	Tax            float64        `json:"tax"`
+	Discount       float64        `json:"discount"`
+	TotalAmount    float64        `json:"total_amount"`
+	PaymentMethod  string         `json:"payment_method"`
+	TransactionDate time.Time      `json:"transactionDate"`
 }
+
+
+
+
+
 
 type ReceiptItem struct {
     ProductName  string   `json:"product_name"`
@@ -45,8 +51,9 @@ type ReceiptItem struct {
 type ReceiptReply struct {
 	Data       *Receipt
 	Collection []Receipt
-	streams    <-chan Receipt
+	Stream    <-chan Receipt
 	Error      error
+	ErrorStream <-chan error
 }
 
 

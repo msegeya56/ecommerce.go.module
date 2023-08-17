@@ -31,8 +31,9 @@ type Creditcard struct {
 type CreditcardReply struct {
 	Data       *entities.Creditcard
 	Collection  []entities.Creditcard
-	streams    <-chan entities.Creditcard
+	Stream    <-chan entities.Creditcard
 	Error      error
+	ErrorStream <-chan error
 }
 
 

@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"time"
+
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 )
@@ -20,19 +20,28 @@ type Customer struct {
 	FullName       string     `json:"fullName"`
 	Phone          string     `json:"phone"`
 	Address        string     `json:"address"`
-	Orders         []Order    `json:"orders"`
-	Wishlist       []Product  `json:"wishlist"`
-	Reviews        []Review   `json:"reviews"`
-	Creditcardd    Creditcard `json:"creditCard"`
+	Orders []Order            `json:"order" gorm:"foreignKey:CustomerID"`
+	Wishlist       []Product  `json:"wishlist" gorm:"foreignKey:CustomerID"`
+	Reviews        []Review   `json:"reviews" gorm:"foreignKey:CustomerID"`
+	Creditcardd    Creditcard `json:"creditCard" gorm:"foreignKey:CustomerID"`
 	ProfilePicture string     `json:"profilePicture"`
 	AccountBalance float64    `json:"accountBalance"`
-	LastLogin      time.Time  `json:"lastLogin"`
+
 }
+
+
+
+
+
+
+
+
+
 
 type CustomerReply struct {
 	Data       *Customer
 	Collection []Customer
-	streams    <-chan Customer
+	Stream    <-chan Customer
 	Error      error
 }
 

@@ -38,7 +38,8 @@ type Gateway struct {
 		Data     *entities.Gateway
 		Collection []entities.Gateway
 		Streams   <-chan entities.Gateway
-		error       error 
+		Error       error
+		ErrorStream <-chan error
 	}	
 
 

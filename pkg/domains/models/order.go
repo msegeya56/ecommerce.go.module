@@ -1,5 +1,6 @@
 package models
 
+
 import (
 	"encoding/json"
 	"io"
@@ -18,20 +19,20 @@ import (
 type Order struct {
 	commons.Foundation
 	ID           uint         `gorm:"column:id;type:varchar;size:255"`
-	Customer     Customer     `gorm:"column:customer;type:varchar;size:255"` 
+	Customer     Customer      `gorm:"foreignkey:CustomerID"`
+	CustomerID   uint         `gorm:"column:customer_id;type:varchar;size:255"`
 	Products     []Product    `gorm:"column:products;type:varchar;size:255"`
-	TotalPrice   float64        `gorm:"column:total;type:float64:val1;size:255"`
-    Discount     float64         `gorm:"column:id;type:val1;size:255"`
-	Status       string         `gorm:"column:status;type:string;size:255"`
-	Payment      []Payment       `gorm:"column:payment;type:varchar;size:"`
-	InvoiceID      uint          `gorm:"column:id;type:varchar;size:255"`
-	
+	TotalPrice   float64      `gorm:"column:total_price;type:float64;size:255"`
+	Discount     float64      `gorm:"column:discount;type:float64;size:255"`
+	Status       string       `gorm:"column:status;type:string;size:255"`
+	Payment      []Payment    `gorm:"column:payment;type:varchar;size:255"`
+	InvoiceID    uint         `gorm:"column:invoice_id;type:varchar;size:255"`
 }
 
 type OrderReply struct {
 	commons.Foundation
 	Data        *entities.Order
-	collection  []entities.Order
+	Collection  []entities.Order
 	Stream      <-chan entities.Order
 	Error       error
 	ErrorStream <-chan error

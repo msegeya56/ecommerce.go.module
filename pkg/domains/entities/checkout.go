@@ -14,7 +14,7 @@ import (
 
 
 type Checkout struct {
-	commons.Foundation
+	commons.FoundationEntity
 	ID          uint        `json:"id"`   
 	CustomerID  uint        `json:"customer_id"`
      Products  []Product     `json:"products"`
@@ -34,8 +34,9 @@ type Checkout struct {
 type CheckoutReply struct {
 	Data       *Checkout
 	Collection []Checkout
-	streams    <-chan  Checkout
+	Stream    <-chan  Checkout
 	Error      error
+	ErrorStream <-chan error
 }
 
 

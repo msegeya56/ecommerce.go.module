@@ -36,8 +36,9 @@ type Checkout struct {
 type CheckoutReply struct {
 	Data       *entities.Checkout
 	Collection []entities.Checkout
-	streams    <-chan entities.Checkout
+	Stream    <-chan entities.Checkout
 	Error      error
+	ErrorStream <-chan error
 }
 
 

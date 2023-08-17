@@ -1,5 +1,11 @@
 package entities
 
+
+
+
+
+
+
 import (
 	"encoding/json"
 	"io"
@@ -11,26 +17,31 @@ import (
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 )
 
+
+
+
 type Review struct {
 	commons.FoundationEntity
-	ID          uint    `jsoni:"id"`
-    CustomerID uint      `json:"customer_id"`
-    ProductID  uint      `json:"product_id"`
-    OrderID    uint      `json:"order_id"`
-    Rating    float64     `json:"rating"`
-    Comment   string     `json:"comment"`
+	CustomerID uint    `json:"customer_id"`
+	ProductID  uint    `json:"product_id"`
+	OrderID    uint    `json:"order_id"`
+	Rating     float64 `json:"rating"`
+	Comment    string  `json:"comment"`
 }
+
 
 
 
 type ReviewReply struct {
-	
 	Data        *Review
-	collection  []Review
+	Collection  []Review
 	Stream      <-chan Review
 	Error       error
 	ErrorStream <-chan error
 }
+
+
+
 
 func (re*Review) ToJson() string {
 	jsonBytes, _ := json.Marshal(re)

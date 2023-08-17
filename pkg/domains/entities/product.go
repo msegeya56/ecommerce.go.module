@@ -12,22 +12,23 @@ import (
 )
 
 type Product struct {
-	commons.Foundation
-	ID          uint    `json:"id"`
-	Name        string  `json:"name"`
-	Description string  `json:"description"`
-	Price       float64 `json:"price"`
-	Stock       uint    `json:"stock;"`
-	Category  Category `json:"categoryze"`
-	Tags    []string `json:"tags"`
-	Reviews []Review `json:"reviews"`
-	Ratings []Rating `json:"ratings"`
-	Images  []string `json:"images"`
+	commons.FoundationEntity
+	ID          uint     `json:"id"`
+	Name        string   `json:"name"`
+	Description string   `json:"description"`
+	Price       float64  `json:"price"`
+	Stock       uint     `json:"stock"`
+	Category    Category `json:"category"`
+	Tags        []string `json:"tags"`
+	Reviews     []Review `gorm:"foreignKey:ProductID" json:"reviews"`
+	Ratings     []Rating `json:"ratings"`
+	Images      []string `json:"images"`
 }
+
 
 type ProductReply struct {
 	Data        *Product
-	collection  []Product
+	Collection  []Product
 	Stream      <-chan Product
 	Error       error
 	ErrorStream <-chan error

@@ -26,9 +26,8 @@ type Payment struct {
 }
 
 type PaymentReply struct {
-	
 	Data        *Payment
-	collection  []Payment
+	Collection  []Payment
 	Stream      <-chan Payment
 	Error       error
 	ErrorStream <-chan error

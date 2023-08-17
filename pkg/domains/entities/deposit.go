@@ -31,8 +31,9 @@ type Deposit struct {
 type DepositReply struct {
 	Data       *Deposit
 	Collection []Deposit
-	streams    <-chan Deposit
+	Stream  <-chan Deposit
 	Error      error
+	ErrorStream <-chan error
 }
 
 

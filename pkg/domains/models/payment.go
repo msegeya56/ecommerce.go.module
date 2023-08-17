@@ -29,7 +29,7 @@ type Payment struct {
 type PaymentReply struct {
 	commons.Foundation
 	Data        *entities.Payment
-	collection  []entities.Payment
+	Collection  []entities.Payment
 	Stream      <-chan entities.Payment
 	Error       error
 	ErrorStream <-chan error

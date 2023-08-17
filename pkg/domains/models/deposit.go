@@ -31,8 +31,9 @@ type Deposit struct {
 type DepositReply struct {
 	Data       *entities.Deposit
 	Collection []entities.Deposit
-	streams    <-chan entities.Deposit
+	Stream     <-chan entities.Deposit
 	Error      error
+	ErrorStream <-chan error
 }
 
 

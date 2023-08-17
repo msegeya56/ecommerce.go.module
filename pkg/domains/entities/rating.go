@@ -24,9 +24,8 @@ type Rating struct {
 
 
 type RatingReply struct {
-	
 	Data        *Rating
-	collection  []Rating
+	Collection  []Rating
 	Stream      <-chan Rating
 	Error       error
 	ErrorStream <-chan error

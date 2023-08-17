@@ -27,7 +27,7 @@ type Rating struct {
 type RatingReply struct {
 	commons.FoundationEntity
 	Data        *entities.Rating
-	collection  []entities.Rating
+	Collection  []entities.Rating
 	Stream      <-chan entities.Rating
 	Error       error
 	ErrorStream <-chan error

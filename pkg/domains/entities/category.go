@@ -16,7 +16,7 @@ import (
 
 type Category struct {
 	commons.FoundationEntity
-	ID          uint           `json:"id;"`   
+	ID          uint           `json:"id"`   
 	Name          string       `json:"name"`
 	Description   string       `json:"description"`
 	Parent        *Category    `json:"parent"`
@@ -35,7 +35,7 @@ type CategoryReply struct {
 	
 	Data       *Category
 	Collection []Category
-	streams    <-chan Category
+	Stream    <-chan Category
 	Error      error
 }
 

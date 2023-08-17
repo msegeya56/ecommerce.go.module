@@ -34,8 +34,9 @@ type Category struct {
 type CategoryReply struct {
 	Data       *entities.Category
 	Collection []entities.Category
-	streams    <-chan entities.Category
+	Stream      <-chan entities.Category
 	Error      error
+	ErrorStream <-chan error
 }
 
 
