@@ -16,12 +16,12 @@ import (
 
 type Category struct {
 	commons.Foundation
-	ID          uint           `gorm:"column:id;type:varchar;size:255"`   
-	Name          string       `gorm:"column:name;type:varchar;size:255"`
-	Description   string     `  gorm:"column:description;type:varchar;size:255"`
-	Parent        *Category    `gorm:"column:parent;type:varchar;size:size:255"`
-	Subcategories []Category    `gorm:"column:subcategories;type:varcharsize:255"`
-	Products      []Product    `gorm:"column:products;type:varchar;size:255"`
+	Name          string      `gorm:"column:name;type:varchar;size:255"`
+	Description   string      `gorm:"column:description;type:varchar;size:255"`
+	ParentID      uint        `gorm:"column:parent_id"`
+	Parent        *Category   `gorm:"foreignKey:ParentID"`
+	Subcategories []Category  `gorm:"foreignKey:ParentID"`
+	Products      []Product   `gorm:"column:products;type:varchar;size:255"`
 }
 
 

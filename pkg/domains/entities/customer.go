@@ -7,40 +7,28 @@ import (
 	"io"
 	"net/http"
 
-
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 )
 
 type Customer struct {
 	commons.FoundationEntity
-	ID             uint       `json:"id"`
 	Username       string     `json:"username"`
 	Email          string     `json:"email"`
 	Password       string     `json:"password"`
 	FullName       string     `json:"fullName"`
 	Phone          string     `json:"phone"`
 	Address        string     `json:"address"`
-	Orders []Order            `json:"order" gorm:"foreignKey:CustomerID"`
+	Orders         []Order    `json:"order" gorm:"foreignKey:CustomerID"`
 	Reviews        []Review   `json:"reviews" gorm:"foreignKey:CustomerID"`
 	Creditcardd    Creditcard `json:"creditCard" gorm:"foreignKey:CustomerID"`
 	ProfilePicture string     `json:"profilePicture"`
 	AccountBalance float64    `json:"accountBalance"`
-
 }
-
-
-
-
-
-
-
-
-
 
 type CustomerReply struct {
 	Data       *Customer
 	Collection []Customer
-	Stream    <-chan Customer
+	Stream     <-chan Customer
 	Error      error
 }
 

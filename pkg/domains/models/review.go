@@ -14,15 +14,13 @@ import (
 
 type Review struct {
 	commons.Foundation
-	ID          uint    `gorm:"column:id;type:varchar;size:255"`
-    CustomerID uint      `gorm:"column:customer_id;type:varchar;type:varchar;size:255"`
-    ProductID  uint      `gorm:"column:product_id;type:varchar;size:255"`
-    OrderID    uint      `gorm:"column:order_id;type:varchar;size:255"`
-    Rating    float64     `gorm:"column:rating;type:float64;size:255"`
-    Comment   string     `gorm:"column:comment:;type:string;size:255"`
+	ID         uint    `gorm:"column:id;type:varchar;size:255"`
+	CustomerID uint    `gorm:"column:customer_id;type:varchar;type:varchar;size:255"`
+	ProductID  uint    `gorm:"column:product_id;type:varchar;size:255"`
+	OrderID    uint    `gorm:"column:order_id;type:varchar;size:255"`
+	Rating     float64 `gorm:"column:rating;type:float64;size:255"`
+	Comment    string  `gorm:"column:comment:;type:string;size:255"`
 }
-
-
 
 type ReviewReply struct {
 	commons.Foundation
@@ -33,7 +31,7 @@ type ReviewReply struct {
 	ErrorStream <-chan error
 }
 
-func (re*Review) ToJson() string {
+func (re *Review) ToJson() string {
 	jsonBytes, _ := json.Marshal(re)
 	x := fmt.Sprintf("%v", string(jsonBytes))
 
@@ -52,7 +50,7 @@ func (re *Review) FromJson(data string) *Review {
 	return re
 }
 
-func (re*Review) FromIOReadCloser(r io.ReadCloser) (*Review, error) {
+func (re *Review) FromIOReadCloser(r io.ReadCloser) (*Review, error) {
 
 	if r == nil {
 
@@ -76,10 +74,10 @@ func (re*Review) FromIOReadCloser(r io.ReadCloser) (*Review, error) {
 
 	}
 
-	return  re,nil
+	return re, nil
 }
 
-func (re*Review) FromRequestBody(r *http.Request) (*Review, error) {
+func (re *Review) FromRequestBody(r *http.Request) (*Review, error) {
 
 	if r == nil {
 

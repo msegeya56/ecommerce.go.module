@@ -7,40 +7,27 @@ import (
 	"io"
 	"net/http"
 
-	
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 )
 
-
-
-
 type Category struct {
 	commons.FoundationEntity
-	ID          uint           `json:"id"`   
-	Name          string       `json:"name"`
-	Description   string       `json:"description"`
-	Parent        *Category    `json:"parent"`
-	Subcategories []Category    `json:"subcategories"`
-	Products      []Product    `json:"products"`
+	Name          string     `json:"name"`
+	Description   string     `json:"description"`
+	ParentID      uint       `json:"parent_id" gorm:"column:parent_id"`
+	Parent        *Category  `json:"parent" gorm:"foreignKey:ParentID"`
+	Subcategories []Category `json:"subcategories" gorm:"foreignKey:ParentID"`
+	Products      []Product  `json:"products" gorm:"column:products;type:varchar;size:255"`
 }
 
-
-
-
-
-
-
-
 type CategoryReply struct {
-	
 	Data       *Category
 	Collection []Category
-	Stream    <-chan Category
+	Stream     <-chan Category
 	Error      error
 }
 
-
-func (ca*Category) ToJson() string {
+func (ca *Category) ToJson() string {
 	jsonBytes, _ := json.Marshal(ca)
 	x := fmt.Sprintf("%v", string(jsonBytes))
 
@@ -48,7 +35,7 @@ func (ca*Category) ToJson() string {
 	return x
 
 }
-func(ca*Category) FromJson(data string) *Category {
+func (ca *Category) FromJson(data string) *Category {
 	err := json.Unmarshal([]byte(data), ca)
 
 	if err != nil {
@@ -59,7 +46,7 @@ func(ca*Category) FromJson(data string) *Category {
 	return ca
 }
 
-func (ca*Category) FromIOReadCloser(r io.ReadCloser) (*Category, error) {
+func (ca *Category) FromIOReadCloser(r io.ReadCloser) (*Category, error) {
 
 	if r == nil {
 
@@ -86,7 +73,7 @@ func (ca*Category) FromIOReadCloser(r io.ReadCloser) (*Category, error) {
 	return ca, nil
 }
 
-func (ca*Category) FromRequestBody(r *http.Request) (*Category, error) {
+func (ca *Category) FromRequestBody(r *http.Request) (*Category, error) {
 
 	if r == nil {
 
@@ -112,7 +99,7 @@ func (ca*Category) FromRequestBody(r *http.Request) (*Category, error) {
 	return ca, nil
 }
 
-func (ca*Category) FromResponseBody(r *http.Response) (*Category, error) {
+func (ca *Category) FromResponseBody(r *http.Response) (*Category, error) {
 
 	if r == nil {
 

@@ -17,7 +17,6 @@ import (
 
 type Customer struct {
 	commons.Foundation
-	ID               uint        `gorm:"column:id;type:varchar;size:255"`
 	Username         string      `gorm:"column:username;type:varchar;size:255"`
 	Email           string       `gorm:"column:email;type:varchar;size:255"`
 	Password         string      `gorm:"column:password;type:varchar;size:255"`
@@ -26,7 +25,7 @@ type Customer struct {
 	Address          string      `gorm:"column:address;type:varchar;size:255"`
 	Orders   []Order             `gorm:"foreignKey:CustomerID"`
     Reviews []Review              `gorm:"foreignKey:CustomerID"`
-	Creditcardd Creditcard        `gorm:"foreignKey:CustomerID"`
+	Creditcard Creditcard        `gorm:"foreignKey:CustomerID"`
     ProfilePicture   string       `gorm:"column:profilePicture;type:varchar;size:255"`
 	AccountBalance   float64      `gorm:"column:accountBalance;type:varchar;size:255"`
 
