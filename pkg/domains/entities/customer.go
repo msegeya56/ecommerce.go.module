@@ -21,7 +21,6 @@ type Customer struct {
 	Phone          string     `json:"phone"`
 	Address        string     `json:"address"`
 	Orders []Order            `json:"order" gorm:"foreignKey:CustomerID"`
-	Wishlist       []Product  `json:"wishlist" gorm:"foreignKey:CustomerID"`
 	Reviews        []Review   `json:"reviews" gorm:"foreignKey:CustomerID"`
 	Creditcardd    Creditcard `json:"creditCard" gorm:"foreignKey:CustomerID"`
 	ProfilePicture string     `json:"profilePicture"`

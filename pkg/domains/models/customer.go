@@ -25,7 +25,6 @@ type Customer struct {
 	Phone            string      `gorm:"column:phone;type:varchar;size:255"`
 	Address          string      `gorm:"column:address;type:varchar;size:255"`
 	Orders   []Order             `gorm:"foreignKey:CustomerID"`
-	Wishlist []Product           `gorm:"foreignKey:CustomerID"`
     Reviews []Review              `gorm:"foreignKey:CustomerID"`
 	Creditcardd Creditcard        `gorm:"foreignKey:CustomerID"`
     ProfilePicture   string       `gorm:"column:profilePicture;type:varchar;size:255"`
