@@ -17,12 +17,11 @@ import (
 
 type Product struct {
 	commons.Foundation
-	ID          uint     `gorm:"column:id;type:varchar;size:255"`
 	Name        string   `gorm:"column:name;type:varchar;size:255"`
 	Description string   `gorm:"column:description;type:varchar;size:255"`
 	Price       float64  `gorm:"column:price;type:varchar;size:255"`
 	Stock       uint     `gorm:"column:stock;type:varchar;size:255"`
-	Category    Category `gorm:"column:category;type:varchar;size:255"`
+	Category    Category `gorm:"foreignKey:CategoryID"`
 	Tags        []string `gorm:"column:tags;type:varchar;size:255"`
 	Reviews     []Review `gorm:"foreignKey:ProductID"` // Establish the relationship with reviews
 	Ratings     []Rating `gorm:"column:ratings;type:varchar;size:255"`

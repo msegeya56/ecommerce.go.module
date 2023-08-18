@@ -13,18 +13,17 @@ import (
 
 type Product struct {
 	commons.FoundationEntity
-	ID          uint     `json:"id"`
+
 	Name        string   `json:"name"`
 	Description string   `json:"description"`
 	Price       float64  `json:"price"`
 	Stock       uint     `json:"stock"`
-	Category    Category `json:"category"`
+	CategoryID  uint     `json:"category_id"`
 	Tags        []string `json:"tags"`
 	Reviews     []Review `gorm:"foreignKey:ProductID" json:"reviews"`
 	Ratings     []Rating `json:"ratings"`
 	Images      []string `json:"images"`
 }
-
 
 type ProductReply struct {
 	Data        *Product
@@ -33,7 +32,6 @@ type ProductReply struct {
 	Error       error
 	ErrorStream <-chan error
 }
-
 
 func (p *Product) FromJson(data string) *Product {
 	err := json.Unmarshal([]byte(data), p)
@@ -108,7 +106,6 @@ func (p *Product) FromResponseBody(r *http.Response) (*Product, error) {
 
 	decoder := json.NewDecoder(r.Body)
 	defer r.Body.Close()
-
 
 	for {
 		err := decoder.Decode(p)

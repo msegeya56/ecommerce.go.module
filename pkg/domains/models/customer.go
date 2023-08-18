@@ -17,35 +17,26 @@ import (
 
 type Customer struct {
 	commons.Foundation
-	Username         string      `gorm:"column:username;type:varchar;size:255"`
-	Email           string       `gorm:"column:email;type:varchar;size:255"`
-	Password         string      `gorm:"column:password;type:varchar;size:255"`
-	FullName         string      `gorm:"column:fullName;type:varchar;size:255"`
-	Phone            string      `gorm:"column:phone;type:varchar;size:255"`
-	Address          string      `gorm:"column:address;type:varchar;size:255"`
-	Orders   []Order             `gorm:"foreignKey:CustomerID"`
-    Reviews []Review              `gorm:"foreignKey:CustomerID"`
-	Creditcard Creditcard        `gorm:"foreignKey:CustomerID"`
-    ProfilePicture   string       `gorm:"column:profilePicture;type:varchar;size:255"`
-	AccountBalance   float64      `gorm:"column:accountBalance;type:varchar;size:255"`
-
+	Alias        string  `gorm:"column:alias" json:"alias,omitempty" gorm:"column:alias" dgraph:"customer.alias"`
+ 	ComplianceID string  `gorm:"column:compliance_id" json:"compliance_id,omitempty" gorm:"column:compliance_id" dgraph:"customer.complianceID"`
+	Firstname    string  `gorm:"column:firstname" json:"firstname,omitempty" form:"first_name,omitempty" dgraph:"customer.firstname"`
+    Middlename    string  `gorm:"column:middlename" json:"middlename,omitempty" form:"middlename,omitempty" dgraph:"customer.middlename"`
+	Lastname     string  `gorm:"column:lastname" json:"lastname,omitempty" form:"lastname,omitempty" dgraph:"customer.lastname"`
+	MobileNumber string  `gorm:"column:mobile_number" json:"mobile_number,omitempty" form:"mobile_number,omitempty" dgraph:"customer.mobilenumber"`
+	Email        string  `gorm:"column:email" json:"email,omitempty" form:"email,omitempty" dgraph:"customer.email"`
+	Address      string  `gorm:"column:address" json:"address,omitempty" form:"address,omitempty" dgraph:"customer.address"`
+	Latitude     float64 `gorm:"column:latitude" json:"latitude,omitempty" form:"latitude,omitempty" dgraph:"customer.latitude"`
+	Longitude    float64 `gorm:"column:longitude" json:"longitude,omitempty" form:"longitude,omitempty" dgraph:"customer.longitude"`
+	Dob          string  `gorm:"column:dob" json:"dob,omitempty" form:"dob,omitempty" dgraph:"customer.dob"`
 }
-
-
-
-
-
-
 
 
 type CustomerReply struct {
 	Data       *entities.Customer
+	Stream     <-chan entities.Customer
 	Collection []entities.Customer
-	Stream    <-chan entities.Customer
 	Error      error
-	ErrorStream <-chan error
 }
-
 
 func (c *Customer) ToJson() string {
 	jsonBytes, _ := json.Marshal(c)
