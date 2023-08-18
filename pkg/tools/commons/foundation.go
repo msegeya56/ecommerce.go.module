@@ -7,6 +7,7 @@ import (
 )
 
 type Foundation struct {
+	gorm.Model
 	ID          uint `gorm:"primaryKey"`
 	Name        string
 	Description string
