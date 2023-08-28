@@ -10,6 +10,7 @@ import (
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/domains/entities"
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"gorm.io/gorm"
 )
 
 
@@ -17,6 +18,7 @@ import (
 
 type Product struct {
 	commons.Foundation
+	  gorm.Model
 	Name        string   `gorm:"column:name;type:varchar;size:255"`
 	Description string   `gorm:"column:description;type:varchar;size:255"`
 	Price       float64  `gorm:"column:price;type:varchar;size:255"`

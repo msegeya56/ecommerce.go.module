@@ -8,10 +8,12 @@ import (
 	"net/http"
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"gorm.io/gorm"
 )
 
 type Category struct {
 	commons.FoundationEntity
+	gorm.Model
 	Name          string     `json:"name"`
 	Description   string     `json:"description"`
 	ParentID      uint       `json:"parent_id" gorm:"column:parent_id"`

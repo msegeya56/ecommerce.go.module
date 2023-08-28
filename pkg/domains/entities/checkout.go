@@ -8,6 +8,7 @@ import (
 	"net/http"
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"gorm.io/gorm"
 )
 
 
@@ -15,7 +16,7 @@ import (
 
 type Checkout struct {
 	commons.FoundationEntity
-	ID          uint        `json:"id"`   
+	gorm.Model
 	CustomerID  uint        `json:"customer_id"`
      Products  []Product     `json:"products"`
 	Total     float64        `json:"total"`

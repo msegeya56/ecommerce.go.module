@@ -9,16 +9,17 @@ import (
 	"net/http"
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"gorm.io/gorm"
 )
 
 type Product struct {
 	commons.FoundationEntity
-
+     gorm.Model
 	Name        string   `json:"name"`
 	Description string   `json:"description"`
 	Price       float64  `json:"price"`
 	Stock       uint     `json:"stock"`
-	CategoryID  uint     `json:"category_id"`
+	Category    Category `gorm:"foreignKey:CategoryID"`
 	Tags        []string `json:"tags"`
 	Reviews     []Review `gorm:"foreignKey:ProductID" json:"reviews"`
 	Ratings     []Rating `json:"ratings"`
