@@ -15,6 +15,7 @@ import (
 
 
 type Book struct {
+	
     ID          uint   `gorm:"primaryKey"`
     Title       string `gorm:"column:title;not null"`
     Author      string `gorm:"column:author;not null"`
