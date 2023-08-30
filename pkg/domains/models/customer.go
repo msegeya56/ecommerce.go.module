@@ -14,7 +14,6 @@ import (
 
 type Customer struct {
 	commons.Foundation 
-	ID          uint   `gorm:"primaryKey"`
      Firstname    string  `json:"firstname,omitempty" dgraph:"customer.firstname" xml:"firstname" gorm:"column:firstname" form:"firstname"`
 	Lastname     string  `json:"lastname,omitempty" dgraph:"customer.lastname" xml:"lastname" gorm:"column:lastname" form:"lastname"`
 	Middlename   string  `json:"middlename,omitempty" dgraph:"customer.middlename" xml:"middlename" gorm:"column:middlename" form:"middlename"`
