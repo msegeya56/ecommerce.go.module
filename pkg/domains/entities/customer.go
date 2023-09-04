@@ -11,25 +11,25 @@ import (
 )
 
 type Customer struct {
-	commons.FoundationEntity
-	Firstname    string  `json:"firstname,omitempty" dgraph:"customer.firstname" xml:"firstname" gorm:"column:firstname" form:"firstname"`
-	Lastname     string  `json:"lastname,omitempty" dgraph:"customer.lastname" xml:"lastname" gorm:"column:lastname" form:"lastname"`
-	Middlename   string  `json:"middlename,omitempty" dgraph:"customer.middlename" xml:"middlename" gorm:"column:middlename" form:"middlename"`
-	MobileNumber string  `json:"mobile_number,omitempty" dgraph:"customer.mobileNumber" xml:"mobile_number" gorm:"column:mobile_number" form:"mobile_number"`
-	Address      string  `json:"address,omitempty" dgraph:"customer.address" xml:"address" gorm:"column:address" form:"address"`
-	Latitude     float64 `json:"latitude,omitempty" dgraph:"customer.latitude" xml:"latitude" gorm:"column:latitude" form:"latitude"`
-	Longitude    float64 `json:"longitude,omitempty" dgraph:"customer.longitude" xml:"longitude" gorm:"column:longitude" form:"longitude"`
-	Alias        string  `json:"alias,omitempty" dgraph:"customer.alias" xml:"alias" gorm:"column:alias" form:"alias"`
-	Email        string  `json:"email,omitempty" dgraph:"customer.email" xml:"email" gorm:"column:email" form:"email"`
-	// ComplianceID string       `json:"compliance_id,omitempty" dgraph:"customer.complianceID" xml:"compliance_id" gorm:"column:compliance_id" form:"compliance_id"`
-	Dob  string `json:"dob,omitempty" form:"dob,omitempty" dgraph:"customer.dob" xml:"dob" gorm:"column:dob"`
-	Name string `json:"name,omitempty" dgraph:"customer.name" xml:"name" gorm:"column:name" form:"name"`
-	// Compliance   []Compliance `json:"compliance,omitempty" dgraph:"customer.compliance" xml:"compliance>item" gorm:"constraint:OnUpdate:CASCADE,OnDelete:CASCADE" form:"compliance"`
-	Next     string      `json:"next,omitempty" dgraph:"customer.next" xml:"next" gorm:"column:next" form:"next"`
-	Link     string      `json:"link,omitempty" dgraph:"customer.link" xml:"link" gorm:"column:link" form:"link"`
-	Previous string      `json:"previous,omitempty" dgraph:"customer.previous" xml:"previous" gorm:"column:previous" form:"previous"`
-	
+    Data struct {
+		commons.FoundationEntity
+        Firstname    string `json:"firstname" gorm:"column:firstname" graphql:"firstname"`
+        Lastname     string `json:"lastname" gorm:"column:lastname" graphql:"lastname"`
+        Middlename   string `json:"middlename" gorm:"column:middlename" graphql:"middlename"`
+        MobileNumber string `json:"mobile_number" gorm:"column:mobile_number" graphql:"mobile_number"`
+        Latitude     float64 `json:"latitude" gorm:"column:latitude" graphql:"latitude"`
+        Longitude    float64 `json:"longitude" gorm:"column:longitude" graphql:"longitude"`
+        Alias        string `json:"alias" gorm:"column:alias" graphql:"alias"`
+        Email        string `json:"email" gorm:"column:email" graphql:"email"`
+        Dob          string `json:"dob" gorm:"column:dob" graphql:"dob"`
+        Name         string `json:"name" gorm:"column:name" graphql:"name"`
+        Next         string `json:"next" gorm:"column:next" graphql:"next"`
+        Link         string `json:"link" gorm:"column:link" graphql:"link"`
+        Previous     string `json:"previous" gorm:"column:previous" graphql:"previous"`
+    } `json:"data"`
 }
+
+
 
 type CustomerReply struct {
 	Data       *Customer
