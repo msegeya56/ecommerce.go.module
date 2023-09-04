@@ -12,22 +12,20 @@ import (
 )
 
 type Customer struct {
-	Data struct {
-		commons.Foundation
-		Firstname    string  `json:"firstname" gorm:"column:firstname" graphql:"firstname"`
-		Lastname     string  `json:"lastname" gorm:"column:lastname" graphql:"lastname"`
-		Middlename   string  `json:"middlename" gorm:"column:middlename" graphql:"middlename"`
-		MobileNumber string  `json:"mobile_number" gorm:"column:mobile_number" graphql:"mobile_number"`
-		Latitude     float64 `json:"latitude" gorm:"column:latitude" graphql:"latitude"`
-		Longitude    float64 `json:"longitude" gorm:"column:longitude" graphql:"longitude"`
-		Alias        string  `json:"alias" gorm:"column:alias" graphql:"alias"`
-		Email        string  `json:"email" gorm:"column:email" graphql:"email"`
-		Dob          string  `json:"dob" gorm:"column:dob" graphql:"dob"`
-		Name         string  `json:"name" gorm:"column:name" graphql:"name"`
-		Next         string  `json:"next" gorm:"column:next" graphql:"next"`
-		Link         string  `json:"link" gorm:"column:link" graphql:"link"`
-		Previous     string  `json:"previous" gorm:"column:previous" graphql:"previous"`
-	} `json:"data"`
+	commons.Foundation
+	Firstname    string  `json:"firstname" gorm:"column:firstname" graphql:"firstname"`
+	Lastname     string  `json:"lastname" gorm:"column:lastname" graphql:"lastname"`
+	Middlename   string  `json:"middlename" gorm:"column:middlename" graphql:"middlename"`
+	MobileNumber string  `json:"mobile_number" gorm:"column:mobile_number" graphql:"mobile_number"`
+	Latitude     float64 `json:"latitude" gorm:"column:latitude" graphql:"latitude"`
+	Longitude    float64 `json:"longitude" gorm:"column:longitude" graphql:"longitude"`
+	Alias        string  `json:"alias" gorm:"column:alias" graphql:"alias"`
+	Email        string  `json:"email" gorm:"column:email" graphql:"email"`
+	Dob          string  `json:"dob" gorm:"column:dob" graphql:"dob"`
+	Name         string  `json:"name" gorm:"column:name" graphql:"name"`
+	Next         string  `json:"next" gorm:"column:next" graphql:"next"`
+	Link         string  `json:"link" gorm:"column:link" graphql:"link"`
+	Previous     string  `json:"previous" gorm:"column:previous" graphql:"previous"`
 }
 
 type CustomerReply struct {

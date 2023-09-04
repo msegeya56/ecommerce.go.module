@@ -11,7 +11,6 @@ import (
 )
 
 type Customer struct {
-    Data struct {
 		commons.FoundationEntity
         Firstname    string `json:"firstname" gorm:"column:firstname" graphql:"firstname"`
         Lastname     string `json:"lastname" gorm:"column:lastname" graphql:"lastname"`
@@ -26,7 +25,7 @@ type Customer struct {
         Next         string `json:"next" gorm:"column:next" graphql:"next"`
         Link         string `json:"link" gorm:"column:link" graphql:"link"`
         Previous     string `json:"previous" gorm:"column:previous" graphql:"previous"`
-    } `json:"data"`
+    
 }
 
 
