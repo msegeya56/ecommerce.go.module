@@ -30,7 +30,7 @@ type Customer struct {
 	Next     string `json:"next,omitempty" dgraph:"customer.next" xml:"next" gorm:"column:next" form:"next"`
 	Link     string `json:"link,omitempty" dgraph:"customer.link" xml:"link" gorm:"column:link" form:"link"`
 	Previous string `json:"previous,omitempty" dgraph:"customer.previous" xml:"previous" gorm:"column:previous" form:"previous"`
-	Data     interface{} `json:"data,omitempty"` 
+	
 }
 
 type CustomerReply struct {
