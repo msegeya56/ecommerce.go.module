@@ -16,7 +16,6 @@ import (
    
 type Creditcard struct {
     commons.FoundationEntity
-    ID             uint    `json:"id"`
 	CustomerID  uint       `json:"customer_id"`
   CardNumber     string    `json:"card_number"`
    CardholderName string   `json:"card_holder_name"`

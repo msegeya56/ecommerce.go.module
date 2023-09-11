@@ -14,8 +14,7 @@ import (
 
 
 type Creditlimit struct {
-    commons.Foundation
-    ID             uint    `json:"id"`
+    commons.FoundationEntity
     CustomerID     uint    `json:"customer_id"`
     MaxLimit       float64 `json:"max_limit"`
     CurrentBalance float64 `json:"current_balance"`
@@ -26,14 +25,6 @@ type Creditlimit struct {
 
 
 
-
-type CReditlimittReply struct {
-	Data       *Creditlimit
-	Collection []Creditlimit
-	Stream    <-chan Creditlimit
-	Error      error
-	ErrorStream <-chan error
-}
 
 
 func (cl*Creditlimit) ToJson() string {

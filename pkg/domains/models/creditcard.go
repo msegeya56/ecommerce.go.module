@@ -16,7 +16,6 @@ import (
 
 type Creditcard struct {
     commons.Foundation
-    ID             uint   `gorm:"column:id;primaryKey;autoIncrement"`
 	CustomerID     uint   `gorm:"column:customer_id;tprimaryKey;autoIncrement"`
     CardNumber     string `gorm:"column:card_number;type:varchar(255)"`
     CardholderName string `gorm:"column:card_holder_name;type:varchar(255)"`

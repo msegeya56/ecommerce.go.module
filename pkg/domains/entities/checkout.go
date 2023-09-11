@@ -8,7 +8,7 @@ import (
 	"net/http"
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
-	"gorm.io/gorm"
+
 )
 
 
@@ -16,7 +16,6 @@ import (
 
 type Checkout struct {
 	commons.FoundationEntity
-	gorm.Model
 	CustomerID  uint        `json:"customer_id"`
      Products  []Product     `json:"products"`
 	Total     float64        `json:"total"`
@@ -32,13 +31,6 @@ type Checkout struct {
 
 
 
-type CheckoutReply struct {
-	Data       *Checkout
-	Collection []Checkout
-	Stream    <-chan  Checkout
-	Error      error
-	ErrorStream <-chan error
-}
 
 
 func (ch*Checkout) ToJson() string {

@@ -30,13 +30,6 @@ type Customer struct {
 
 
 
-type CustomerReply struct {
-	Data       *Customer
-	Collection []Customer
-	Stream     <-chan Customer
-	Error      error
-}
-
 func (c *Customer) ToJson() string {
 	jsonBytes, _ := json.Marshal(c)
 	x := fmt.Sprintf("%v", string(jsonBytes))
