@@ -17,16 +17,10 @@ type Category struct {
 	Description   string     `json:"description"`
 	ParentID      uint       `json:"parent_id" gorm:"column:parent_id"`
 	Parent        *Category  `json:"parent" gorm:"foreignKey:ParentID"`
-	Subcategories Category `json:"subcategories" gorm:"foreignKey:ParentID"`
+	Subcategories []Category `json:"subcategories" gorm:"foreignKey:ParentID"`
 	Products      Product  `json:"products" gorm:"column:products;type:varchar;size:255"`
 }
 
-type CategoryReply struct {
-	Data       *Category
-	Collection []Category
-	Stream     <-chan Category
-	Error      error
-}
 
 func (ca *Category) ToJson() string {
 	jsonBytes, _ := json.Marshal(ca)
