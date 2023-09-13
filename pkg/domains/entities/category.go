@@ -8,7 +8,6 @@ import (
 	"net/http"
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
-	
 )
 
 type Category struct {
@@ -18,9 +17,8 @@ type Category struct {
 	ParentID      uint       `json:"parent_id" gorm:"column:parent_id"`
 	Parent        *Category  `json:"parent" gorm:"foreignKey:ParentID"`
 	Subcategories []Category `json:"subcategories" gorm:"foreignKey:ParentID"`
-	Products      Product  `json:"products" gorm:"column:products;type:varchar;size:255"`
+	Products      Product    `json:"products" gorm:"column:products;type:varchar;size:255"`
 }
-
 
 func (ca *Category) ToJson() string {
 	jsonBytes, _ := json.Marshal(ca)

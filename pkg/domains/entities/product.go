@@ -9,12 +9,10 @@ import (
 	"net/http"
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
-	"gorm.io/gorm"
 )
 
 type Product struct {
 	commons.FoundationEntity
-	gorm.Model
 	Name        string   `json:"name"`
 	Description string   `json:"description"`
 	Price       float64  `json:"price"`
@@ -24,14 +22,6 @@ type Product struct {
 	Reviews     []Review `gorm:"foreignKey:ProductID" json:"reviews"`
 	Ratings     []Rating `json:"ratings"`
 	Images      []string `json:"images"`
-}
-
-type ProductReply struct {
-	Data        *Product
-	Collection  []Product
-	Stream      <-chan Product
-	Error       error
-	ErrorStream <-chan error
 }
 
 func (p *Product) FromJson(data string) *Product {
