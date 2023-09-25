@@ -13,11 +13,11 @@ import (
 
 type Customer struct {
 	commons.Foundation
-	FirstName    string  `json:"firstname" gorm:"column:firstname" graphql:"firstname"`
-	LastName     string  `json:"lastname" gorm:"column:lastname" graphql:"lastname"`
-	MiddleName   string  `json:"middlename" gorm:"column:middlename" graphql:"middlename"`
+	FirstName    string  `json:"first_name" gorm:"column:firstname" graphql:"firstname"`
+	LastName     string  `json:"last_name" gorm:"column:lastname" graphql:"lastname"`
+	MiddleName   string  `json:"middle_name" gorm:"column:middlename" graphql:"middlename"`
 	MobileNumber string  `json:"mobile_number" gorm:"column:mobile_number" graphql:"mobile_number"`
-	Latitude     float64 `json:"latitude" gorm:"column:latitude" graphql:"latitude"`
+	Latitude     float64 `json:"latitude" gorm:"colum_n:latitude" graphql:"latitude"`
 	Longitude    float64 `json:"longitude" gorm:"column:longitude" graphql:"longitude"`
 	Alias        string  `json:"alias" gorm:"column:alias" graphql:"alias"`
 	Email        string  `json:"email" gorm:"column:email" graphql:"email"`
