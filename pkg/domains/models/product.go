@@ -21,7 +21,7 @@ type Product struct {
 	Description string   `gorm:"column:description;type:varchar;size:255"`
 	Price       float64  `gorm:"column:price;type:varchar;size:255"`
 	Stock       uint     `gorm:"column:stock;type:varchar;size:255"`
-	CategoryID  uint     `json:"category_id"`
+	Customer    Customer  `gorm:"foreignKey:CustomerID" json:"customer"`
 	Category    Category `gorm:"foreignKey:CategoryID" json:"category"`
 	Tags        string `gorm:"column:tags;type:varchar;size:255"`
 	Reviews     Review `gorm:"foreignKey:ProductID"` // Establish the relationship with reviews
