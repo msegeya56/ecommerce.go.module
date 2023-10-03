@@ -11,22 +11,12 @@ import (
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 )
 
-
-
-
 type Deposit struct {
 	commons.Foundation
-	ID          uint        `gorm:"column:id;type:varchar;size:255"`   
-	CustomerID  uint        `gorm:"column:customer_id;type:varint;size:255"`
-	Amount   float64        `gorm:"column:amount;type:val1;size:255"`
+	ID         uint    `gorm:"column:id;type:varchar;size:255"`
+	CustomerID uint    `gorm:"column:customer_id;type:varint;size:255"`
+	Amount     float64 `gorm:"column:amount;type:val1;size:255"`
 }
-
-
-
-
-
-
-
 
 type DepositReply struct {
 	Data       *entities.Deposit
@@ -35,8 +25,7 @@ type DepositReply struct {
 	Error      error
 }
 
-
-func (d*Deposit) ToJson() string {
+func (d *Deposit) ToJson() string {
 	jsonBytes, _ := json.Marshal(d)
 	x := fmt.Sprintf("%v", string(jsonBytes))
 
@@ -44,7 +33,7 @@ func (d*Deposit) ToJson() string {
 	return x
 
 }
-func(d*Deposit) FromJson(data string) *Deposit {
+func (d *Deposit) FromJson(data string) *Deposit {
 	err := json.Unmarshal([]byte(data), d)
 
 	if err != nil {
@@ -55,7 +44,7 @@ func(d*Deposit) FromJson(data string) *Deposit {
 	return d
 }
 
-func (d*Deposit) FromIOReadCloser(r io.ReadCloser) (*Deposit, error) {
+func (d *Deposit) FromIOReadCloser(r io.ReadCloser) (*Deposit, error) {
 
 	if r == nil {
 
@@ -82,7 +71,7 @@ func (d*Deposit) FromIOReadCloser(r io.ReadCloser) (*Deposit, error) {
 	return d, nil
 }
 
-func (d*Deposit) FromRequestBody(r *http.Request) (*Deposit, error) {
+func (d *Deposit) FromRequestBody(r *http.Request) (*Deposit, error) {
 
 	if r == nil {
 
@@ -108,7 +97,7 @@ func (d*Deposit) FromRequestBody(r *http.Request) (*Deposit, error) {
 	return d, nil
 }
 
-func (d*Deposit) FromResponseBody(r *http.Response) (*Deposit, error) {
+func (d *Deposit) FromResponseBody(r *http.Response) (*Deposit, error) {
 
 	if r == nil {
 
