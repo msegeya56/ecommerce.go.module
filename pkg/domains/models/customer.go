@@ -6,7 +6,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"time"
+	
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/domains/entities"
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
@@ -14,24 +14,28 @@ import (
 
 
 
-
 type Customer struct {
-	commons.Foundation
-	ID               uint        `gorm:"column:id;type:varchar;size:255"`
-	Username         string      `gorm:"column:username;type:varchar;size:255"`
-	Email           string       `gorm:"column:email;type:varchar;size:255"`
-	Password         string      `gorm:"column:password;type:varchar;size:255"`
-	FullName         string      `gorm:"column:fullName;type:varchar;size:255"`
-	Phone            string      `gorm:"column:phone;type:varchar;size:255"`
-	Address          string      `gorm:"column:address;type:varchar;size:255"`
-	Orders           []Order     `gorm:"column:orders;type:varchar;size:255"`
-	Wishlist         []Product   `gorm:"column:wishlist;type:varchar;size:255"`
-	Reviews          []Review    `gorm:"column:reviews;type:varchar;size:255"`
-	Creditcardd     Creditcard  `gorm:"column:creditCard;type:varchar;size:255"`
-	ProfilePicture   string      `gorm:"column:profilePicture;type:varchar;size:255"`
-	AccountBalance   float64     `gorm:"column:accountBalance;type:varchar;size:255"`
-	LastLogin        time.Time   `gorm:"column:lastLogin;type:varchar;size:255"`
+    commons.Foundation
+    Firstname      string       `json:"firstname,omitempty" dgraph:"customer.firstname" xml:"firstname" gorm:"column:firstname" form:"firstname"`
+    Lastname       string       `json:"lastname,omitempty" dgraph:"customer.lastname" xml:"lastname" gorm:"column:lastname" form:"lastname"`
+    Middlename     string       `json:"middlename,omitempty" dgraph:"customer.middlename" xml:"middlename" gorm:"column:middlename" form:"middlename"`
+    MobileNumber   string       `json:"mobile_number,omitempty" dgraph:"customer.mobileNumber" xml:"mobile_number" gorm:"column:mobile_number" form:"mobile_number"`
+    Address        string       `json:"address,omitempty" dgraph:"customer.address" xml:"address" gorm:"column:address" form:"address"`
+    Latitude       float64      `json:"latitude,omitempty" dgraph:"customer.latitude" xml:"latitude" gorm:"column:latitude" form:"latitude"`
+    Longitude      float64      `json:"longitude,omitempty" dgraph:"customer.longitude" xml:"longitude" gorm:"column:longitude" form:"longitude"`
+    Alias          string       `json:"alias,omitempty" dgraph:"customer.alias" xml:"alias" gorm:"column:alias" form:"alias"`
+    Email          string       `json:"email,omitempty" dgraph:"customer.email" xml:"email" gorm:"column:email" form:"email"`
+    ComplianceID   string       `json:"compliance_id,omitempty" dgraph:"customer.complianceID" xml:"compliance_id" gorm:"column:compliance_id" form:"compliance_id"`
+    Dob            string       `json:"dob,omitempty" form:"dob,omitempty" dgraph:"customer.dob" xml:"dob" gorm:"column:dob" form:"dob"`
+    Name           string       `json:"name,omitempty" dgraph:"customer.name" xml:"name" gorm:"column:name" form:"name"`
+    Next           string       `json:"next,omitempty" dgraph:"customer.next" xml:"next" gorm:"column:next" form:"next"`
+    ShippingAddress string     `json:"shippingAddress,omitempty" xml:"shippingAddress" form:"shippingAddress"`
+    BillingAddress  string     `json:"billingAddress,omitempty" xml:"billingAddress" form:"billingAddress"`
+    AccountBalance  float64    `json:"accountBalance,omitempty" xml:"accountBalance" form:"accountBalance"`
+    Link            string     `json:"link,omitempty" dgraph:"customer.link" xml:"link" gorm:"column:link" form:"link"`
+    Previous        string     `json:"previous,omitempty" dgraph:"customer.previous" xml:"previous" gorm:"column:previous" form:"previous"`
 }
+
 
 
 

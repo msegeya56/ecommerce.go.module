@@ -6,32 +6,32 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	"time"
+
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 )
 
 
-
-
 type Customer struct {
-	commons.FoundationEntity
-	ID               uint        `json:"id"`
-	Username         string      `json:"username"`
-	Email            string      `json:"email"`
-	Password         string      `json:"password"`
-	FullName         string      `json:"fullName"`
-	Phone            string      `json:"phone"`
-	Address          string      `json:"address"`
-	Orders           []Order     `json:"orders"`
-	Wishlist         []Product   `json:"wishlist"`
-	Reviews          []Review    `json:"reviews"`
-	Creditcardd     Creditcard  `json:"creditCard"`
-	ShippingAddress  string      `json:"shippingAddress"`
-	BillingAddress   string      `json:"billingAddress"`
-	ProfilePicture   string      `json:"profilePicture"`
-	AccountBalance   float64     `json:"accountBalance"`
-	LastLogin        time.Time   `json:"lastLogin"`
+    commons.FoundationEntity
+
+    Firstname       string  `json:"firstname,omitempty" dgraph:"customer.firstname" xml:"firstname" gorm:"column:firstname" form:"firstname"`
+    Lastname        string  `json:"lastname,omitempty" dgraph:"customer.lastname" xml:"lastname" gorm:"column:lastname" form:"lastname"`
+    Middlename      string  `json:"middlename,omitempty" dgraph:"customer.middlename" xml:"middlename" gorm:"column:middlename" form:"middlename"`
+    MobileNumber    string  `json:"mobile_number,omitempty" dgraph:"customer.mobileNumber" xml:"mobile_number" gorm:"column:mobile_number" form:"mobile_number"`
+    Address         string  `json:"address,omitempty" dgraph:"customer.address" xml:"address" gorm:"column:address" form:"address"`
+    Latitude        float64 `json:"latitude,omitempty" dgraph:"customer.latitude" xml:"latitude" gorm:"column:latitude" form:"latitude"`
+    Longitude       float64 `json:"longitude,omitempty" dgraph:"customer.longitude" xml:"longitude" gorm:"column:longitude" form:"longitude"`
+    Alias           string  `json:"alias,omitempty" dgraph:"customer.alias" xml:"alias" gorm:"column:alias" form:"alias"`
+    Email           string  `json:"email,omitempty" dgraph:"customer.email" xml:"email" gorm:"column:email" form:"email"`
+    Dob             string  `json:"dob,omitempty" dgraph:"customer.dob" xml:"dob" gorm:"column:dob" form:"dob"`
+    Name            string  `json:"name,omitempty" dgraph:"customer.name" xml:"name" gorm:"column:name" form:"name"`
+    Next            string  `json:"next,omitempty" dgraph:"customer.next" xml:"next" gorm:"column:next" form:"next"`
+    ShippingAddress string  `json:"shippingAddress,omitempty" xml:"shippingAddress" form:"shippingAddress"`
+    BillingAddress  string  `json:"billingAddress,omitempty" xml:"billingAddress" form:"billingAddress"`
+    AccountBalance  float64 `json:"accountBalance,omitempty" xml:"accountBalance" form:"accountBalance"`
+    Link            string  `json:"link,omitempty" dgraph:"customer.link" xml:"link" gorm:"column:link" form:"link"`
+    Previous        string  `json:"previous,omitempty" dgraph:"customer.previous" xml:"previous" gorm:"column:previous" form:"previous"`
 }
 
 
@@ -40,13 +40,6 @@ type Customer struct {
 
 
 
-
-type CustomerReply struct {
-	Data       *Customer
-	Collection []Customer
-	streams    <-chan Customer
-	Error      error
-}
 
 
 func (c *Customer) ToJson() string {
