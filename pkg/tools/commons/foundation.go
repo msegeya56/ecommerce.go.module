@@ -17,8 +17,7 @@ type Foundation struct {
 	Status      int
 	Data        []byte
 	Document    []byte
-	Events      []byte
-	DeletedAt   DeletedAt `gorm:"index"`
+	Events      string
 }
 
 type FoundationEntity struct {
@@ -30,6 +29,5 @@ type FoundationEntity struct {
 	Status      int
 	Data        []byte
 	Document    []byte
-	Events      []byte
-	DeletedAt   DeletedAt `gorm:"index"`
+	Events      string
 }
