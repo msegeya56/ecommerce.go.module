@@ -22,7 +22,6 @@ type Customer struct {
 	Longitude       float64 `json:"longitude,omitempty" dgraph:"customer.longitude" xml:"longitude" gorm:"column:longitude" form:"longitude"`
 	Alias           string  `json:"alias,omitempty" dgraph:"customer.alias" xml:"alias" gorm:"column:alias" form:"alias"`
 	Email           string  `json:"email,omitempty" dgraph:"customer.email" xml:"email" gorm:"column:email" form:"email"`
-	ComplianceID    string  `json:"compliance_id,omitempty" dgraph:"customer.complianceID" xml:"compliance_id" gorm:"column:compliance_id" form:"compliance_id"`
 	Dob             string  `json:"dob,omitempty" dgraph:"customer.dob" xml:"dob" gorm:"column:dob" form:"dob"`
 	Name            string  `json:"name,omitempty" dgraph:"customer.name" xml:"name" gorm:"column:name" form:"name"`
 	ShippingAddress string  `json:"shippingAddress,omitempty" xml:"shippingAddress" form:"shippingAddress"`
