@@ -26,10 +26,10 @@ type Customer struct {
     Email           string  `json:"email,omitempty" dgraph:"customer.email" xml:"email" gorm:"column:email" form:"email"`
     Dob             string  `json:"dob,omitempty" dgraph:"customer.dob" xml:"dob" gorm:"column:dob" form:"dob"`
     Name            string  `json:"name,omitempty" dgraph:"customer.name" xml:"name" gorm:"column:name" form:"name"`
-    Next            string  `json:"next,omitempty" dgraph:"customer.next" xml:"next" gorm:"column:next" form:"next"`
     ShippingAddress string  `json:"shippingAddress,omitempty" xml:"shippingAddress" form:"shippingAddress"`
     BillingAddress  string  `json:"billingAddress,omitempty" xml:"billingAddress" form:"billingAddress"`
     AccountBalance  float64 `json:"accountBalance,omitempty" xml:"accountBalance" form:"accountBalance"`
+	Next            string  `json:"next,omitempty" dgraph:"customer.next" xml:"next" gorm:"column:next" form:"next"`
     Link            string  `json:"link,omitempty" dgraph:"customer.link" xml:"link" gorm:"column:link" form:"link"`
     Previous        string  `json:"previous,omitempty" dgraph:"customer.previous" xml:"previous" gorm:"column:previous" form:"previous"`
 }
