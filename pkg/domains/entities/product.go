@@ -11,27 +11,38 @@ import (
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 )
 
-type Product struct {
-	commons.Foundation
-	ID          uint    `gorm:"column:id;type:varchar;size:255"`
-	Name        string  `gorm:"column:name;type:varchar;size:255"`
-	Description string  `gorm:"column:description;type:varchar;size:255"`
-	Price       float64 `gorm:"column:price;type:varchar;size:255"`
-	Stock       uint    `gorm:"column:stock;type:varchar;size:255"`
-	Category  Category `gorm:"column:category;type:varchar;size:255"`
-	Tags    []string `gorm:"column:tags;type:varchar;size:255"`
-	Reviews []Review `gorm:"column:reviews;type:varchar;size:255"`
-	Ratings []Rating `gorm:"column:ratings;type:varchar;size:255"`
-	Images  []string `gorm:"column:images;type:varchar;size:255"`
+type Product struct {                                                                                                                                                                             
+	commons.FoundationEntity
+	Name        string   `gorm:"column:name;type:varchar(255)" json:"name"`
+	Description string   `gorm:"column:description;type:varchar(255)" json:"description"`
+	Price       float64  `gorm:"column:price" json:"price"`
+	Stock       uint     `gorm:"column:stock" json:"stock"`
+	CategoryID  uint     `gorm:"column:category_id" json:"category_id"`
+	Category    Category `gorm:"foreignKey:CategoryID" json:"category"`
 }
 
-type ProductReply struct {
-	commons.FoundationEntity
-	Data        *Product
-	collection  []Product
-	Stream      <-chan Product
-	Error       error
-	ErrorStream <-chan error
+type Tag struct {
+	ID        uint   `gorm:"primaryKey;column:id" json:"id"`
+	Name      string `gorm:"column:name;type:varchar(255)" json:"name"`
+	ProductID uint   `gorm:"column:product_id" json:"product_id"`
+}
+
+type Review struct {
+	ID        uint   `gorm:"primaryKey;column:id" json:"id"`
+	Text      string `gorm:"column:text;type:text" json:"text"`
+	ProductID uint   `gorm:"column:product_id" json:"product_id"`
+}
+
+type Rating struct {
+	ID        uint    `gorm:"primaryKey;column:id" json:"id"`
+	Score     float64 `gorm:"column:score" json:"score"`
+	ProductID uint    `gorm:"column:product_id" json:"product_id"`
+}
+
+type Image struct {
+	ID        uint   `gorm:"primaryKey;column:id" json:"id"`
+	URL       string `gorm:"column:url;type:varchar(255)" json:"url"`
+	ProductID uint   `gorm:"column:product_id" json:"product_id"`
 }
 
 func (p *Product) ToJson() string {

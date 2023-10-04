@@ -3,6 +3,7 @@ package models
 import (
 	"encoding/json"
 	"io"
+	"time"
 
 	"errors"
 	"fmt"
@@ -13,20 +14,25 @@ import (
 )
 
 
-
-
 type Order struct {
-	commons.Foundation
-	ID           uint         `gorm:"column:id;type:varchar;size:255"`
-	Customer     Customer     `gorm:"column:customer;type:varchar;size:255"` 
-	Products     []Product    `gorm:"column:products;type:varchar;size:255"`
-	TotalPrice   float64        `gorm:"column:total;type:float64:val1;size:255"`
-    Discount     float64         `gorm:"column:id;type:val1;size:255"`
-	Status       string         `gorm:"column:status;type:string;size:255"`
-	Payment      []Payment       `gorm:"column:payment;type:varchar;size:"`
-	InvoiceID      uint          `gorm:"column:id;type:varchar;size:255"`
-	
+    commons.Foundation
+    CustomerID   uint      `gorm:"column:customer_id" json:"customer_id"`
+    Items        []OrderItem `gorm:"-" json:"items"`
+    TotalAmount  float64   `gorm:"column:total_amount" json:"total_amount"`
+    OrderDate    time.Time `gorm:"column:order_date" json:"order_date"`
+    // Add other fields as needed
 }
+
+type OrderItem struct {
+    ID         uint    `gorm:"primaryKey;column:id" json:"id"`
+    OrderID    uint    `gorm:"column:order_id" json:"order_id"`
+    ProductID  uint    `gorm:"column:product_id" json:"product_id"`
+    Quantity   int     `gorm:"column:quantity" json:"quantity"`
+    Price      float64 `gorm:"column:price" json:"price"`
+    Product    Product `gorm:"foreignKey:ProductID" json:"product"`
+}
+
+
 
 type OrderReply struct {
 	commons.Foundation

@@ -28,12 +28,6 @@ type Creditcard struct {
 
 
 
-type CreditcardReply struct {
-	Data       *Creditcard
-	Collection []Creditcard
-	streams    <-chan Creditcard
-	Error      error
-}
 
 
 func (c *Creditcard) ToJson() string {
