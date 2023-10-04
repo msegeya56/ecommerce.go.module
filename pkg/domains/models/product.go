@@ -14,8 +14,8 @@ import (
 
 type Product struct {
     commons.Foundation
-    Name        string   `gorm:"column:name;type:varchar(255)" json:"name,omitempty" dgraph:"product.name" xml:"name" form:"name"`
-    Description string   `gorm:"column:description;type:varchar(255)" json:"description,omitempty" dgraph:"product.description" xml:"description" form:"description"`
+    Name        string   `gorm:"column:name" json:"name,omitempty" dgraph:"product.name" xml:"name" form:"name"`
+    Description string   `gorm:"column:description" json:"description,omitempty" dgraph:"product.description" xml:"description" form:"description"`
     Price       float64  `gorm:"column:price" json:"price,omitempty" dgraph:"product.price" xml:"price" form:"price"`
     Stock       uint     `gorm:"column:stock" json:"stock,omitempty" dgraph:"product.stock" xml:"stock" form:"stock"`
     CategoryID  uint     `gorm:"column:category_id" json:"category_id,omitempty" dgraph:"product.category_id" xml:"category_id" form:"category_id"`
