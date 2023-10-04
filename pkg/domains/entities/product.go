@@ -12,7 +12,7 @@ import (
 )
 
 type Product struct {
-    commons.Foundation
+    commons.FoundationEntity
     Name        string   `gorm:"column:name;type:varchar(255)" json:"name,omitempty" dgraph:"product.name" xml:"name" form:"name"`
     Description string   `gorm:"column:description;type:varchar(255)" json:"description,omitempty" dgraph:"product.description" xml:"description" form:"description"`
     Price       float64  `gorm:"column:price;type:double precision" json:"price,omitempty" dgraph:"product.price" xml:"price" form:"price"`
