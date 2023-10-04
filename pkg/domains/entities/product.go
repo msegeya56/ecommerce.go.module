@@ -12,18 +12,19 @@ import (
 )
 
 type Product struct {
-    commons.FoundationEntity
-    Name        string   `gorm:"column:name" json:"name,omitempty" dgraph:"product.name" xml:"name" form:"name"`
-    Description string   `gorm:"column:description" json:"description,omitempty" dgraph:"product.description" xml:"description" form:"description"`
-    Price       float64  `gorm:"column:price" json:"price,omitempty" dgraph:"product.price" xml:"price" form:"price"`
-    Stock       uint     `gorm:"column:stock" json:"stock,omitempty" dgraph:"product.stock" xml:"stock" form:"stock"`
-    CategoryID  uint     `gorm:"column:category_id" json:"category_id,omitempty" dgraph:"product.category_id" xml:"category_id" form:"category_id"`
+    commons.Foundation
+    Name        string   `gorm:"column:name;type:varchar(255)" json:"name,omitempty" dgraph:"product.name" xml:"name" form:"name"`
+    Description string   `gorm:"column:description;type:varchar(255)" json:"description,omitempty" dgraph:"product.description" xml:"description" form:"description"`
+    Price       float64  `gorm:"column:price;type:double precision" json:"price,omitempty" dgraph:"product.price" xml:"price" form:"price"`
+    Stock       uint     `gorm:"column:stock;type:integer" json:"stock,omitempty" dgraph:"product.stock" xml:"stock" form:"stock"`
+    CategoryID  uint     `gorm:"column:category_id;type:integer" json:"category_id,omitempty" dgraph:"product.category_id" xml:"category_id" form:"category_id"`
     Category    Category `gorm:"foreignKey:CategoryID" json:"category,omitempty" dgraph:"product.category" xml:"category" form:"category"`
     Next        string   `json:"next,omitempty" dgraph:"product.next" xml:"next" form:"next"`
     Link        string   `json:"link,omitempty" dgraph:"product.link" xml:"link" form:"link"`
     Previous    string   `json:"previous,omitempty" dgraph:"product.previous" xml:"previous" form:"previous"`
     // Add other fields here with the same struct tags as above
 }
+
 
 
 type Tag struct {
