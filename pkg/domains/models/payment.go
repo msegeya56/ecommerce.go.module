@@ -17,7 +17,6 @@ import (
 
 type Payment struct {
 	commons.Foundation
-	ID           uint       `gorm:"column:id;type:varchar;size:255"`
 	OrderID       uint     `gorm:"column:order_id;type:varchar;size:255"`
 	Amount       float64    `gorm:"column:amount;type:varchar;size:255"`
 	Method       string     `gorm:"column:method;type:varchar;size:255"`
@@ -29,7 +28,7 @@ type Payment struct {
 type PaymentReply struct {
 	commons.Foundation
 	Data        *entities.Payment
-	collection  []entities.Payment
+	collection  []*entities.Payment
 	Stream      <-chan entities.Payment
 	Error       error
 	ErrorStream <-chan error

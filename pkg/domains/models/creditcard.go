@@ -15,8 +15,7 @@ import (
 
 
 type Creditcard struct {
-    commons.FoundationEntity
-    ID             uint   `gorm:"column:id;primaryKey;autoIncrement"`
+    commons.Foundation
     CardNumber     string `gorm:"column:card_number;type:varchar(25)"`
     CardholderName string `gorm:"column:card_holder_name;type:varchar(255)"`
     ExpirationDate string `gorm:"column:expiration_date;type:varchar(255)"`
@@ -30,8 +29,8 @@ type Creditcard struct {
 
 type CreditcardReply struct {
 	Data       *entities.Creditcard
-	Collection  []entities.Creditcard
-	streams    <-chan entities.Creditcard
+	Collection  []*entities.Creditcard
+	Streams    <-chan entities.Creditcard
 	Error      error
 }
 

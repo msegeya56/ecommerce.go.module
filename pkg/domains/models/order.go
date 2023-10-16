@@ -37,7 +37,7 @@ type OrderItem struct {
 type OrderReply struct {
 	commons.Foundation
 	Data        *entities.Order
-	collection  []entities.Order
+	collection  []*entities.Order
 	Stream      <-chan entities.Order
 	Error       error
 	ErrorStream <-chan error

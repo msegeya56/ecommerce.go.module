@@ -12,45 +12,33 @@ import (
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 )
 
-
-
-
 type Receipt struct {
 	commons.Foundation
-	ID          uint        `gorm:"column:id;type:varint;size:255"`   
-	CustomerID  uint        `gorm:"column:customer_id;type:varint;size:255"`
-    OrderID       uint    `gorm:"column:order_id;type;varint:size255"`       // ID of the associated order
-    Items         []ReceiptItem  `gorm:"column:items;type:varchar;size:255"`                                       
-    Subtotal      float64         `gorm:"column:subtotal;type:float64;size:255"`
-    Tax           float64         `gorm:"column:tax;type:float64;size:255"`
-    Discount      float64         `gorm:"column:discount;type:float64;size:255"`
-    TotalAmount   float64         `gorm:"column:total_amount;type:float64;size"`
-    PaymentMethod string           `gorm:"column:payment_method;type:string;size:255"`
-    TransactionDate time.Time       `gorm:"column:transactionDate;type:time.Time;size:255"`
+	CustomerID      uint          `gorm:"column:customer_id;type:varint;size:255"`
+	OrderID         uint          `gorm:"column:order_id;type;varint:size255"` // ID of the associated order
+	Items           []ReceiptItem `gorm:"column:items;type:varchar;size:255"`
+	Subtotal        float64       `gorm:"column:subtotal;type:float64;size:255"`
+	Tax             float64       `gorm:"column:tax;type:float64;size:255"`
+	Discount        float64       `gorm:"column:discount;type:float64;size:255"`
+	TotalAmount     float64       `gorm:"column:total_amount;type:float64;size"`
+	PaymentMethod   string        `gorm:"column:payment_method;type:string;size:255"`
+	TransactionDate time.Time     `gorm:"column:transactionDate;type:time.Time;size:255"`
 }
 
 type ReceiptItem struct {
-    ProductName  string   `gorm:"column:product_name;type:string;size:255"`
-    Quantity     int       `grorm:"column:quantity;type:255"`
-    Subtotal     float64     `gorm:"column:subtotal;type:float64;size:255"`
+	ProductName string  `gorm:"column:product_name;type:string;size:255"`
+	Quantity    int     `grorm:"column:quantity;type:255"`
+	Subtotal    float64 `gorm:"column:subtotal;type:float64;size:255"`
 }
-
-
-
-
-
-
-
 
 type ReceiptReply struct {
 	Data       *entities.Receipt
-	Collection []entities.Receipt
-	streams    <-chan entities.Receipt
+	Collection []*entities.Receipt
+	Streams    <-chan entities.Receipt
 	Error      error
 }
 
-
-func (re*Receipt) ToJson() string {
+func (re *Receipt) ToJson() string {
 	jsonBytes, _ := json.Marshal(re)
 	x := fmt.Sprintf("%v", string(jsonBytes))
 
@@ -58,7 +46,7 @@ func (re*Receipt) ToJson() string {
 	return x
 
 }
-func(re*Receipt) FromJson(data string) *Receipt {
+func (re *Receipt) FromJson(data string) *Receipt {
 	err := json.Unmarshal([]byte(data), re)
 
 	if err != nil {
@@ -69,7 +57,7 @@ func(re*Receipt) FromJson(data string) *Receipt {
 	return re
 }
 
-func (re*Receipt) FromIOReadCloser(r io.ReadCloser) (*Receipt, error) {
+func (re *Receipt) FromIOReadCloser(r io.ReadCloser) (*Receipt, error) {
 
 	if r == nil {
 
@@ -96,7 +84,7 @@ func (re*Receipt) FromIOReadCloser(r io.ReadCloser) (*Receipt, error) {
 	return re, nil
 }
 
-func (re*Receipt) FromRequestBody(r *http.Request) (*Receipt, error) {
+func (re *Receipt) FromRequestBody(r *http.Request) (*Receipt, error) {
 
 	if r == nil {
 
@@ -122,7 +110,7 @@ func (re*Receipt) FromRequestBody(r *http.Request) (*Receipt, error) {
 	return re, nil
 }
 
-func (d*Receipt) FromResponseBody(r *http.Response) (*Receipt, error) {
+func (d *Receipt) FromResponseBody(r *http.Response) (*Receipt, error) {
 
 	if r == nil {
 

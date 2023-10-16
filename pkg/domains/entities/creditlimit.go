@@ -14,8 +14,7 @@ import (
 
 
 type Creditlimit struct {
-    commons.Foundation
-    ID             uint    `gorm:"column:id;type:varint;size:255"`
+    commons.FoundationEntity
     CustomerID     uint    `gorm:"column:customer_id;type:varint;size:255"`
     MaxLimit       float64 `gorm:"column:max_limit;type:double;size:255"`
     CurrentBalance float64 `gorm:"column:current_balance;type:double;size:255"`

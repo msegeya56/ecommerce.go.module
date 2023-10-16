@@ -14,8 +14,7 @@ import (
 
 
 type Checkout struct {
-	commons.Foundation
-	ID          uint        `gorm:"column:id;type:varint;size:255"`   
+	commons.FoundationEntity  
 	CustomerID  uint        `gorm:"column:customer_id;type:varint;size:255"`
      Products  []Product     `gorm:"column:products;type:varint;size:255"`
 	Total     float64        `gorm:"column:total;type:float64:varint:size:255"`

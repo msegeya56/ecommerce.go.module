@@ -7,28 +7,16 @@ import (
 	"io"
 	"net/http"
 
-
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 )
 
-
-
-
 type Creditcard struct {
-    commons.FoundationEntity
-    ID             uint   `gorm:"column:id;primaryKey;autoIncrement"`
-    CardNumber     string `gorm:"column:card_number;type:varchar(25)"`
-    CardholderName string `gorm:"column:card_holder_name;type:varchar(255)"`
-    ExpirationDate string `gorm:"column:expiration_date;type:varchar(255)"`
-    CVV            string `gorm:"column:cvv;type:varchar(10)"`
+	commons.FoundationEntity
+	CardNumber     string `gorm:"column:card_number;type:varchar(25)"`
+	CardholderName string `gorm:"column:card_holder_name;type:varchar(255)"`
+	ExpirationDate string `gorm:"column:expiration_date;type:varchar(255)"`
+	CVV            string `gorm:"column:cvv;type:varchar(10)"`
 }
-
-
-
-
-
-
-
 
 func (c *Creditcard) ToJson() string {
 	jsonBytes, _ := json.Marshal(c)

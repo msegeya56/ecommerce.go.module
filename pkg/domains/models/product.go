@@ -54,7 +54,7 @@ type Image struct {
 type ProductReply struct {
 	commons.Foundation
 	Data        *entities.Product
-	collection  []*entities.Product
+	Collection  []*entities.Product
 	Stream      <-chan entities.Product
 	Error       error
 	ErrorStream <-chan error

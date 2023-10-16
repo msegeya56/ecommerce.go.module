@@ -15,8 +15,7 @@ import (
 
 
 type Deposit struct {
-	commons.FoundationEntity
-	ID          uint        `gorm:"column:id;type:varchar;size:255"`   
+	commons.FoundationEntity  
 	CustomerID  uint        `gorm:"column:customer_id;type:varint;size:255"`
 	Amount   float64        `gorm:"column:amount;type:val1;size:255"`
 }
@@ -26,14 +25,6 @@ type Deposit struct {
 
 
 
-
-
-type DepositReply struct {
-	Data       *Deposit
-	Collection []Deposit
-	streams    <-chan Deposit
-	Error      error
-}
 
 
 func (d*Deposit) ToJson() string {

@@ -13,7 +13,6 @@ import (
 
 type Deposit struct {
 	commons.Foundation
-	ID         uint    `gorm:"column:id;type:varchar;size:255"`
 	CustomerID uint    `gorm:"column:customer_id;type:varint;size:255"`
 	Amount     float64 `gorm:"column:amount;type:val1;size:255"`
 }

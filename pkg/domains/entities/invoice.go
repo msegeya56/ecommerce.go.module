@@ -16,8 +16,7 @@ import (
 
 type Invoice struct {
     commons.FoundationEntity
-    ID           uint        `json:"id" gorm:"column:id;primaryKey;autoIncrement"`
-    CustomerID   uint        `gorm:"column:customer_id;type:varint;size:255"`
+    CustomerID   Customer       `gorm:"column:customer;type:varint;size:255"`
     Order        Order       `json:"order" gorm:"embedded"`
     Amount       float64     `json:"amount" gorm:"type:double;size:255"`
     IssuedDate   time.Time   `json:"issuedDate" gorm:"type:datetime"`
