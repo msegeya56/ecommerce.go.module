@@ -9,19 +9,10 @@ type  Gateway struct {
     Name        string `gorm:"column:name;type:varchar;size:255"`
     Description string  `gorm:"column:description;type:varchar;size:255"`
     APIKey      string   `gorm:"column:api_key;type:varchar;size:255"`
-
+    Customer     CustomerService
 	Product      ProductService
-	Order        OrderService
-	Gateway     GatewayService
-	Category     CategoryService
-	Checkout    CheckoutService
 	Payment      PaymentService
-    Rating        RatingService
-	Review      RatingService
-    Creditcard      CreditcardService
-	Deposit         DepositService
-	Creditlimit     CreditlimitService
-	INvoice          InvoiceService
+   
     Receipt         ReceiptService
 
 
@@ -37,10 +28,6 @@ type ProductService struct {
 	Products []Product
 }
 
-type OrderService struct {
-	Orders []Order
-}
-
 type CheckoutService struct {
 	CheckoutItems []Checkout
 }
@@ -49,19 +36,7 @@ type PaymentService struct {
 	Payments []Payment
 }
 
-type CreditcardService struct {
-	Creditcards []Creditcard
-}
 
-type RatingService struct {
-	
-	Ratings []Rating
-}
-
-
-type ReviewService struct{
-	Reviews []Review
-}
 
 type ReceiptService struct{
 	Receipts []Receipt
@@ -73,24 +48,11 @@ type ReceiptService struct{
 
 
 
-type CategoryService struct{
-	Categories []Category
-}
-
-
-type DepositService struct{
-	Deposits []Deposit
-}
-
-
 type GatewayService    struct{
 	Gateways  []Gateway
 }
 
 
-type InvoiceService struct{
-	Invoices  []Invoice
-}
 
 
 
@@ -100,12 +62,6 @@ type InvoiceService struct{
 
 
 
-
-
-
-type CreditlimitService struct{
-	Creditlimits  []Creditlimit
-}
 
 
 
