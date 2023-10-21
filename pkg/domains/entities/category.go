@@ -16,10 +16,10 @@ import (
 
 type Category struct {
 	commons.FoundationEntity
-	Name          string       `gorm:"column:name;type:varchar;size:255"`
-	Description   string     `  gorm:"column:description;type:varchar;size:255"`
+	Name        string `gorm:"column:name;type:varchar;size:255" json:"name"`
+	Description string `gorm:"column:description;type:varchar;size:255" json:"description"`
 	// Parent        *Category    `gorm:"column:parent;type:varchar;size:size:255"`
-	// Subcategories []Category    `gorm:"column:subcategories;type:varcharsize:255"`
+	// Subcategories []Category    `gorm:"column:subcategories;type:varchar;size:255"`
 	// Products      []Product    `gorm:"column:products;type:varchar;size:255"`
 }
 

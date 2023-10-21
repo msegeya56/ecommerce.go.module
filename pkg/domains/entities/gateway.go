@@ -17,7 +17,25 @@ type  Gateway struct {
 
 
 	// Add more microservices as needed
+
+
+
+
 }
+
+
+
+
+type GatewayReply struct{
+	Data     *Gateway
+	Collection []*Gateway
+	Streams   <-chan Gateway
+	Error       error 
+}	
+
+
+
+
 
 
 type CustomerService struct {
