@@ -15,7 +15,7 @@ import (
 
 
 type Category struct {
-	commons.FoundationEntity
+	commons.Foundation
 	Name        string `gorm:"column:name;type:varchar;size:255" json:"name"`
 	Description string `gorm:"column:description;type:varchar;size:255" json:"description"`
 	// Parent        *Category    `gorm:"column:parent;type:varchar;size:size:255"`
