@@ -12,26 +12,25 @@ import (
 )
 
 
+
 type Customer struct {
     commons.FoundationEntity
-
-    Firstname       string  `json:"firstname,omitempty" dgraph:"customer.firstname" xml:"firstname" gorm:"column:firstname" form:"firstname"`
-    Lastname        string  `json:"lastname,omitempty" dgraph:"customer.lastname" xml:"lastname" gorm:"column:lastname" form:"lastname"`
-    Middlename      string  `json:"middlename,omitempty" dgraph:"customer.middlename" xml:"middlename" gorm:"column:middlename" form:"middlename"`
-    // MobileNumber    string  `json:"mobile_number,omitempty" dgraph:"customer.mobileNumber" xml:"mobile_number" gorm:"column:mobile_number" form:"mobile_number"`
-    Address         string  `json:"address,omitempty" dgraph:"customer.address" xml:"address" gorm:"column:address" form:"address"`
-    Latitude        float64 `json:"latitude,omitempty" dgraph:"customer.latitude" xml:"latitude" gorm:"column:latitude" form:"latitude"`
-    Longitude       float64 `json:"longitude,omitempty" dgraph:"customer.longitude" xml:"longitude" gorm:"column:longitude" form:"longitude"`
-    Alias           string  `json:"alias,omitempty" dgraph:"customer.alias" xml:"alias" gorm:"column:alias" form:"alias"`
-    Email           string  `json:"email,omitempty" dgraph:"customer.email" xml:"email" gorm:"column:email" form:"email"`
-    Dob             string  `json:"dob,omitempty" dgraph:"customer.dob" xml:"dob" gorm:"column:dob" form:"dob"`
-    Name            string  `json:"name,omitempty" dgraph:"customer.name" xml:"name" gorm:"column:name" form:"name"`
-    ShippingAddress string  `json:"shippingAddress,omitempty" xml:"shippingAddress" form:"shippingAddress"`
-    BillingAddress  string  `json:"billingAddress,omitempty" xml:"billingAddress" form:"billingAddress"`
-    AccountBalance  float64 `json:"accountBalance,omitempty" xml:"accountBalance" form:"accountBalance"`
-	Next            string  `json:"next,omitempty" dgraph:"customer.next" xml:"next" gorm:"column:next" form:"next"`
-    Link            string  `json:"link,omitempty" dgraph:"customer.link" xml:"link" gorm:"column:link" form:"link"`
-    Previous        string  `json:"previous,omitempty" dgraph:"customer.previous" xml:"previous" gorm:"column:previous" form:"previous"`
+	FirstName       string  `json:"first_name" gorm:"first_name"`
+    LastName        string  `json:"last_name" gorm:"last_name"`
+    MiddleName      string  `json:"middle_name" gorm:"middle_name"`
+    Address         string  `json:"address" gorm:"address"`
+    Latitude        float64 `json:"latitude" gorm:"latitude"`
+    Longitude       float64 `json:"longitude" gorm:"longitude"`
+    Alias           string  `json:"alias" gorm:"alias"`
+    Email           string  `json:"email" gorm:"email"`
+    Dob             string  `json:"dob" gorm:"dob"`
+    Name            string  `json:"name"  gorm:"name"`
+    ShippingAddress string  `json:"shipping_address" gorm:"shipping_address"`
+    BillingAddress  string  `json:"billing_address" gorm:"billing_address"`
+    AccountBalance  float64 `json:"account_balance" gorm:"amount_balance"`  
+    Next            string  `json:"next"  gorm:"next"`
+    Link            string  `json:"link"  gorm:"link"`
+    Previous        string  `json:"previous" gorm:"previous"`
 }
 
 

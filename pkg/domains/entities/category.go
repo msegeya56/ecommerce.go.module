@@ -7,12 +7,8 @@ import (
 	"io"
 	"net/http"
 
-	
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 )
-
-
-
 
 type Category struct {
 	commons.FoundationEntity
@@ -23,13 +19,6 @@ type Category struct {
 	// Products      []Product    `gorm:"column:products;type:varchar;size:255"`
 }
 
-
-
-
-
-
-
-
 type CategoryReply struct {
 	Data       *Category
 	Collection []Category
@@ -37,8 +26,7 @@ type CategoryReply struct {
 	Error      error
 }
 
-
-func (ca*Category) ToJson() string {
+func (ca *Category) ToJson() string {
 	jsonBytes, _ := json.Marshal(ca)
 	x := fmt.Sprintf("%v", string(jsonBytes))
 
@@ -46,7 +34,7 @@ func (ca*Category) ToJson() string {
 	return x
 
 }
-func(ca*Category) FromJson(data string) *Category {
+func (ca *Category) FromJson(data string) *Category {
 	err := json.Unmarshal([]byte(data), ca)
 
 	if err != nil {
@@ -57,7 +45,7 @@ func(ca*Category) FromJson(data string) *Category {
 	return ca
 }
 
-func (ca*Category) FromIOReadCloser(r io.ReadCloser) (*Category, error) {
+func (ca *Category) FromIOReadCloser(r io.ReadCloser) (*Category, error) {
 
 	if r == nil {
 
@@ -84,7 +72,7 @@ func (ca*Category) FromIOReadCloser(r io.ReadCloser) (*Category, error) {
 	return ca, nil
 }
 
-func (ca*Category) FromRequestBody(r *http.Request) (*Category, error) {
+func (ca *Category) FromRequestBody(r *http.Request) (*Category, error) {
 
 	if r == nil {
 
@@ -110,7 +98,7 @@ func (ca*Category) FromRequestBody(r *http.Request) (*Category, error) {
 	return ca, nil
 }
 
-func (ca*Category) FromResponseBody(r *http.Response) (*Category, error) {
+func (ca *Category) FromResponseBody(r *http.Response) (*Category, error) {
 
 	if r == nil {
 

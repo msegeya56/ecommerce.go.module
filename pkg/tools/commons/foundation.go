@@ -17,7 +17,7 @@ type Foundation struct {
 	Status      int
 	Data        []byte
 	Document    []byte
-	Events      string
+	Events      []byte
 }
 
 type FoundationEntity struct {
@@ -29,5 +29,5 @@ type FoundationEntity struct {
 	Status      int
 	Data        []byte
 	Document    []byte
-	Events      string
+	Events      []byte
 }

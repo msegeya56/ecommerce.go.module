@@ -1,23 +1,19 @@
-!/bin/sh
+#!/bin/bash
 
-# Update go mod
-
-go mod tidy
-
-# Get the most recent tag
+# Get the latest tag
 latest_tag=$(git describe --abbrev=0 --tags)
 
-# Increment the tag version
-new_tag=$(echo $latest_tag | awk -F. -v OFS=. '{$NF++;print}')
+# Extract the tag number
+tag_number=${latest_tag##*v}
 
-# Add the files you want to commit
+# Increment the tag number
+new_tag_number=$((tag_number + 1))
 
-git add .
+# Create the new tag with a 'v' prefix
+new_tag="v$new_tag_number"
 
-# Commit the changes with a descriptive message
-commit_message="Increment tag to $new_tag"
-git commit -m "$commit_message"
+# Tag the current commit with the new tag
+git tag "$new_tag"
 
-# Create the new tag and push it
-git tag $new_tag
-git push origin $new_tag
+# Push the new tag to the remote repository
+git push origin "$new_tag"
