@@ -28,6 +28,7 @@ type Creditcard struct {
 
 
 type CreditcardReply struct {
+	
 	Data       *entities.Creditcard
 	Collection  []*entities.Creditcard
 	Streams    <-chan entities.Creditcard
