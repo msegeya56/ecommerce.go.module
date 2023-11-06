@@ -17,7 +17,6 @@ import (
 
 type Receipt struct {
 	commons.FoundationEntity
-	ID          uint        `gorm:"column:id;type:varint;size:255"`   
 	CustomerID  uint        `gorm:"column:customer_id;type:varint;size:255"`
     OrderID       uint    `gorm:"column:order_id;type;varint:size255"`       // ID of the associated order
     Items         []ReceiptItem  `gorm:"column:items;type:varchar;size:255"`                                       
@@ -44,7 +43,7 @@ type ReceiptItem struct {
 
 type ReceiptReply struct {
 	Data       *Receipt
-	Collection []Receipt
+	Collection []*Receipt
 	streams    <-chan Receipt
 	Error      error
 }
