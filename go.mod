@@ -1,10 +1,11 @@
-module github.com/msegeya56/ecommerce.go.module
+module github.com/msegeya56/package.go.modules/ecommerce.go.module
 
-go 1.20
+go 1.21.1
 
 require (
-	gorm.io/driver/sqlite v1.5.2
-	gorm.io/gorm v1.25.2
+	github.com/msegeya56/ecommerce.go.module v0.0.0-20231105145126-29a6d47685c9
+	gorm.io/driver/sqlite v1.5.4
+	gorm.io/gorm v1.25.5
 )
 
 require (
