@@ -7,11 +7,13 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"gorm.io/gorm"
+	// "github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 )
 
 type Creditcard struct {
-	commons.FoundationEntity
+	gorm.Model
+	// ID            uint    `gorm:"column:id;type:varint;size:255"`
 	CardNumber     string `gorm:"column:card_number;type:varchar(25)"`
 	CardholderName string `gorm:"column:card_holder_name;type:varchar(255)"`
 	ExpirationDate string `gorm:"column:expiration_date;type:varchar(255)"`

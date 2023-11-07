@@ -8,11 +8,11 @@ import (
 	"net/http"
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/domains/entities"
-	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	
 )
 
 type Deposit struct {
-	commons.Foundation
+	ID            uint      `json:"id" gorm:"id"`   
 	CustomerID uint    `gorm:"column:customer_id;type:varint;size:255"`
 	Amount     float64 `gorm:"column:amount;type:val1;size:255"`
 }
@@ -20,7 +20,7 @@ type Deposit struct {
 type DepositReply struct {
 	Data       *entities.Deposit
 	Collection []entities.Deposit
-	streams    <-chan entities.Deposit
+	Streams    <-chan entities.Deposit
 	Error      error
 }
 

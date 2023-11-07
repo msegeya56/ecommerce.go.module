@@ -9,13 +9,13 @@ import (
 	"fmt"
 	"net/http"
 
-
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"gorm.io/gorm"
 )
 
 
 type Invoice struct {
-    commons.FoundationEntity
+    gorm.Model
     CustomerID   Customer       `gorm:"column:customer;type:varint;size:255"`
     Order        Order       `json:"order" gorm:"embedded"`
     Amount       float64     `json:"amount" gorm:"type:double;size:255"`

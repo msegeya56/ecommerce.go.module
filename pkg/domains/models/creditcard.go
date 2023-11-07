@@ -8,14 +8,15 @@ import (
 	"net/http"
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/domains/entities"
-	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"gorm.io/gorm"
 )
 
 
 
 
 type Creditcard struct {
-    commons.Foundation
+	gorm.Model
+	// ID            uint      `json:"id" gorm:"id"`   
     CardNumber     string `gorm:"column:card_number;type:varchar(25)"`
     CardholderName string `gorm:"column:card_holder_name;type:varchar(255)"`
     ExpirationDate string `gorm:"column:expiration_date;type:varchar(255)"`

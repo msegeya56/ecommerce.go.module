@@ -9,14 +9,15 @@ import (
 	"net/http"
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"gorm.io/gorm"
 )
 
 
 
 
 type Payment struct {
-	commons.FoundationEntity
-	ID           uint       `gorm:"column:id;type:varchar;size:255"`
+	gorm.Model
+	// ID           uint       `gorm:"column:id;type:varchar;size:255"`
 	OrderID       uint     `gorm:"column:order_id;type:varchar;size:255"`
 	Amount       float64    `gorm:"column:amount;type:varchar;size:255"`
 	Method       string     `gorm:"column:method;type:varchar;size:255"`

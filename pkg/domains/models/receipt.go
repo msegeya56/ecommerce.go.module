@@ -9,11 +9,12 @@ import (
 	"time"
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/domains/entities"
-	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	// "github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"gorm.io/gorm"
 )
 
 type Receipt struct {
-	commons.Foundation
+	gorm.Model
 	CustomerID      uint          `gorm:"column:customer_id;type:varint;size:255"`
 	OrderID         uint          `gorm:"column:order_id;type;varint:size255"` // ID of the associated order
 	Items           []ReceiptItem `gorm:"column:items;type:varchar;size:255"`

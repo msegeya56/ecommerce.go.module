@@ -8,14 +8,16 @@ import (
 	"net/http"
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/domains/entities"
-	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"gorm.io/gorm"
 )
 
 
 
 
 type Category struct {
-	commons.Foundation
+	gorm.Model
+	
+	// ID            uint      `json:"id" gorm:"id"`
 	Name        string `gorm:"column:name;type:varchar;size:255" json:"name"`
 	Description string `gorm:"column:description;type:varchar;size:255" json:"description"`
 	// Parent        *Category    `gorm:"column:parent;type:varchar;size:size:255"`
@@ -34,7 +36,7 @@ type Category struct {
 type CategoryReply struct {
 	Data       *entities.Category
 	Collection []entities.Category
-	streams    <-chan entities.Category
+	Streams    <-chan entities.Category
 	Error      error
 }
 

@@ -8,13 +8,13 @@ import (
 	"net/http"
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/domains/entities"
-	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"gorm.io/gorm"
 )
 
 
 
 type Customer struct {
-    commons.Foundation
+    gorm.Model  
 	FirstName       string  `json:"first_name" gorm:"first_name"`
     LastName        string  `json:"last_name" gorm:"last_name"`
     MiddleName      string  `json:"middle_name" gorm:"middle_name"`

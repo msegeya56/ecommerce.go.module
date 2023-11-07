@@ -1,11 +1,14 @@
 package entities
 
-import "github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+import (
+	// "github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"gorm.io/gorm"
+)
 
 
 
 type  Gateway struct {
-	commons.FoundationEntity
+	gorm.Model
     Name        string `gorm:"column:name;type:varchar;size:255"`
     Description string  `gorm:"column:description;type:varchar;size:255"`
     APIKey      string   `gorm:"column:api_key;type:varchar;size:255"`

@@ -8,16 +8,16 @@ import (
 	"fmt"
 	"net/http"
 
-
 	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"gorm.io/gorm"
 )
 
 
 
 
 type Order struct {
-	commons.FoundationEntity
-	ID           uint         `gorm:"column:id;type:varchar;size:255"`
+	gorm.Model
+	// ID           uint         `gorm:"column:id;type:varchar;size:255"`
 	Customer     Customer     `gorm:"column:customer;type:varchar;size:255"` 
 	Products     []Product    `gorm:"column:products;type:varchar;size:255"`
 	TotalPrice   float64        `gorm:"column:total;type:float64:val1;size:255"`

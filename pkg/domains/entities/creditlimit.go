@@ -1,7 +1,5 @@
 package entities
 
-
-
 import (
 	"encoding/json"
 	"errors"
@@ -9,12 +7,14 @@ import (
 	"io"
 	"net/http"
 
-	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"gorm.io/gorm"
+	// "github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 )
 
 
 type Creditlimit struct {
-    commons.FoundationEntity
+	gorm.Model
+    // ID            uint    `gorm:"column:id;type:varint;size:255"`
     CustomerID     uint    `gorm:"column:customer_id;type:varint;size:255"`
     MaxLimit       float64 `gorm:"column:max_limit;type:double;size:255"`
     CurrentBalance float64 `gorm:"column:current_balance;type:double;size:255"`

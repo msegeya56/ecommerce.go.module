@@ -6,16 +6,17 @@ import (
 	"fmt"
 	"io"
 	"net/http"
-	
 
-	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"gorm.io/gorm"
+	// "github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
 )
 
 
 
 
 type Deposit struct {
-	commons.FoundationEntity  
+	gorm.Model
+	// ID            uint      `json:"id" gorm:"id"` 
 	CustomerID  uint        `gorm:"column:customer_id;type:varint;size:255"`
 	Amount   float64        `gorm:"column:amount;type:val1;size:255"`
 }
