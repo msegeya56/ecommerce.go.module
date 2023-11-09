@@ -9,11 +9,11 @@ import (
 	"net/http"
 
 	"github.com/msegeya56/ecommerce.go.module/pkg/domains/entities"
-	"github.com/msegeya56/ecommerce.go.module/pkg/tools/commons"
+	"github.com/msegeya56/ecommerce.go.module/pkg/too
 )
 
 type Product struct {
-    commons.Foundation
+	ID        uint   `gorm:"primaryKey;column:id" json:"id"`
     Name        string   `gorm:"column:name;type:varchar(255)" json:"name,omitempty" dgraph:"product.name" xml:"name" form:"name"`
     Description string   `gorm:"column:description;type:varchar(255)" json:"description,omitempty" dgraph:"product.description" xml:"description" form:"description"`
     Price       float64  `gorm:"column:price;type:double precision" json:"price,omitempty" dgraph:"product.price" xml:"price" form:"price"`

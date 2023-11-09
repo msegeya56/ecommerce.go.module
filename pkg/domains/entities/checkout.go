@@ -15,7 +15,6 @@ import (
 
 type Checkout struct {
 	gorm.Model
-	// ID            uint      `json:"id" gorm:"id"`
 	CustomerID  uint        `gorm:"column:customer_id;type:varint;size:255"`
      Products  []Product     `gorm:"column:products;type:varint;size:255"`
 	Total     float64        `gorm:"column:total;type:float64:varint:size:255"`

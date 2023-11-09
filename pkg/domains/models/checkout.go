@@ -15,7 +15,7 @@ import (
 
 
 type Checkout struct {
-	gorm.Model
+	gorm.Model{}
 	// ID            uint      `json:"id" gorm:"id"`   ?
 	CustomerID  uint        `gorm:"column:customer_id;type:varint;size:255"`
      Products  []Product     `gorm:"column:products;type:varint;size:255"`
